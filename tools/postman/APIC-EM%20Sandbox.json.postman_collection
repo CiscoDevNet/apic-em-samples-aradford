@@ -1,0 +1,36 @@
+{
+	"id": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+	"name": "APIC-EM Sandbox",
+	"description": "",
+	"order": [
+		"4faee5af-a11d-67a6-19a7-cc46f12220ce"
+	],
+	"folders": [],
+	"timestamp": 1452037350531,
+	"owner": 0,
+	"remoteLink": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "4faee5af-a11d-67a6-19a7-cc46f12220ce",
+			"headers": "content-type: application/json\n",
+			"url": "https://sandboxapic.cisco.com:9443/api/v1/ticket",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+			"data": [],
+			"dataMode": "raw",
+			"name": "https://sandboxapic.cisco.com:9443/api/v1/ticket",
+			"description": "This request gets an authentication ticket.  This will be used for all subsequent requests.\nThe variable name is token",
+			"descriptionFormat": "html",
+			"time": 1452037984134,
+			"version": 2,
+			"responses": [],
+			"tests": "var data = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"token\", data.response.serviceTicket);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{ \"username\" : \"admin\",\n\"password\" : \"1vtG@lw@y\"\n}\n"
+		}
+	]
+}
