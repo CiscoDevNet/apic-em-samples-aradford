@@ -6,16 +6,17 @@
 	"folders": [
 		{
 			"id": "c3ee7bf0-1707-f11b-01ef-71077b8af064",
-			"name": "Ticket",
-			"description": "",
+			"name": "1.Ticket",
+			"description": "Need to start by getting a ticket from the controller.  The environment vaiables {{username}} and {{password}} are used to authenticate",
 			"order": [
 				"63baeb3e-2413-f2e2-3308-60427666de4f"
 			],
-			"owner": 0
+			"owner": 0,
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c"
 		},
 		{
 			"id": "16f91b98-71a2-2733-e92d-8a1ecd0afc4b",
-			"name": "network-device",
+			"name": "2. network-device",
 			"description": "",
 			"order": [
 				"471d82cc-0f38-fe0c-7557-7b463c5c3972",
@@ -23,6 +24,14 @@
 				"9f38fb4f-c1bf-bf35-dc13-f6c4dcc371ad",
 				"99a0fc95-7049-7adb-cafe-cef0c2f8cf7e"
 			],
+			"owner": 0,
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c"
+		},
+		{
+			"id": "4a21f6ef-8916-2f63-9441-86f7b0eb6c1b",
+			"name": "network PnP",
+			"description": "",
+			"order": [],
 			"owner": 0
 		}
 	],
@@ -84,7 +93,7 @@
 			"data": [],
 			"dataMode": "raw",
 			"name": "/api/v1/ticket",
-			"description": "This request gets an authentication ticket.  This will be used for all subsequent requests.\nThe variable name is token",
+			"description": "This request gets an authentication ticket.  This will be used for all subsequent requests.\n\nThe variable name is token.\n\nThe variables {{username}} and {{password}} are set in the environment",
 			"descriptionFormat": "html",
 			"time": 1452039816630,
 			"version": 2,
