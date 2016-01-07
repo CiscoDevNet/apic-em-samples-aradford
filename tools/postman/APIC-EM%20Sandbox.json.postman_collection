@@ -28,8 +28,44 @@
 			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c"
 		},
 		{
+			"id": "dc092524-0a01-9ca6-b614-dfb06fb7482c",
+			"name": "3.Tags and Location",
+			"description": "",
+			"order": [
+				"af654056-5935-e479-5a88-554b41226013",
+				"ff853d35-1112-5293-b1dc-ab3f00002f1d",
+				"b07fc42a-f69a-4823-d4e2-58f42b697597",
+				"2cb899ea-2ad9-e996-6e3d-4c7910528446",
+				"c103dc0c-0a41-6a78-9262-cf662a1925cd",
+				"323ab275-ba17-70fa-1a9e-c2f9e4503003",
+				"c88c8ca5-c412-526d-6ec7-1a2f38ac691c"
+			],
+			"owner": 0,
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c"
+		},
+		{
+			"id": "18b26ac0-654b-2598-d32e-5c1b2fb38a41",
+			"name": "4.Path Trace",
+			"description": "",
+			"order": [
+				"31479a33-4178-1bfc-004b-a9edd1ea5d4b",
+				"5c13f7bc-f41c-d02f-915a-49f219f95356",
+				"a14f190f-0ad3-5f8f-2c6c-b8b214b45028"
+			],
+			"owner": 0
+		},
+		{
+			"id": "b8d32a9c-29e1-9067-41c7-d53c19e098ea",
+			"name": "99.Task",
+			"description": "",
+			"order": [
+				"1df23eb9-91bb-d19b-9ab1-17b8ab9f3ed8"
+			],
+			"owner": 0
+		},
+		{
 			"id": "4a21f6ef-8916-2f63-9441-86f7b0eb6c1b",
-			"name": "network PnP",
+			"name": "5.network PnP",
 			"description": "",
 			"order": [],
 			"owner": 0
@@ -40,6 +76,25 @@
 	"remoteLink": "",
 	"public": false,
 	"requests": [
+		{
+			"id": "1df23eb9-91bb-d19b-9ab1-17b8ab9f3ed8",
+			"headers": "x-auth-token: {{token}}\n",
+			"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1452053086388,
+			"name": "https://{{apic}}:{{port}}/api/v1/task",
+			"description": "Gets a task status.\nuses environment variable for the taskId",
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+			"responses": []
+		},
 		{
 			"id": "2ae5470f-ae3f-2c9e-8fd4-d15ed1f56edf",
 			"headers": "x-auth-token: {{token}}\n",
@@ -62,6 +117,67 @@
 			"folder": "16f91b98-71a2-2733-e92d-8a1ecd0afc4b"
 		},
 		{
+			"id": "2cb899ea-2ad9-e996-6e3d-4c7910528446",
+			"headers": "x-auth-token: {{token}}\n",
+			"url": "https://{{apic}}:{{port}}/api/v1/tag",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response);\nif (data.response) {\n  tests[\"Body has response\"] = true;\n  var L = data.response.length;\n    for (var i = 0; i < L; i++) {\n    var obj = data.response[i];\n    if (obj.tag == \"InterestingAP\") {\n           postman.setEnvironmentVariable(\"tagId\", obj.id);\n       } \n}\n  \n}\nelse {\n  tests[\"Body has response\"] = false;\n}\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1452067072353,
+			"name": "https://{{apic}}:{{port}}/api/v1/tag FIND TAG",
+			"description": "Gets a list of all tags defined on the controller",
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+			"responses": [],
+			"folder": "dc092524-0a01-9ca6-b614-dfb06fb7482c"
+		},
+		{
+			"id": "31479a33-4178-1bfc-004b-a9edd1ea5d4b",
+			"headers": "x-auth-token: {{token}}\nContent-type: application/json\n",
+			"url": "https://{{apic}}:{{port}}/api/v1/flow-analysis",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+			"data": [],
+			"dataMode": "raw",
+			"name": "https://{{apic}}:{{port}}/api/v1/flow-analysis",
+			"description": "Gets a list of all tags defined on the controller",
+			"descriptionFormat": "html",
+			"time": 1452133026916,
+			"version": 2,
+			"responses": [],
+			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "18b26ac0-654b-2598-d32e-5c1b2fb38a41",
+			"rawModeData": "{\n    \"sourceIP\" : \"65.1.1.83\", \"destIP\" : \"212.1.10.20\"\n}"
+		},
+		{
+			"id": "323ab275-ba17-70fa-1a9e-c2f9e4503003",
+			"headers": "x-auth-token: {{token}}\n",
+			"url": "https://{{apic}}:{{port}}/api/v1/tag/association/{{tagId}}?resourceType=network-device&resourceId=0a15fd77-44ba-4858-b3b1-0df37c4328e0",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "var data1 = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data1.response.taskId);\n\npostman.setEnvironmentVariable(\"taskId\", data1.response.taskId);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1452067179232,
+			"name": "https://{{apic}}:{{port}}/api/v1/tag/association ",
+			"description": "Deletes association between tag and device",
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+			"responses": []
+		},
+		{
 			"id": "471d82cc-0f38-fe0c-7557-7b463c5c3972",
 			"headers": "x-auth-token: {{token}}\n",
 			"url": "https://{{apic}}:{{port}}/api/v1/network-device/1/14",
@@ -81,6 +197,25 @@
 			"currentHelper": "normal",
 			"helperAttributes": {},
 			"folder": "16f91b98-71a2-2733-e92d-8a1ecd0afc4b"
+		},
+		{
+			"id": "5c13f7bc-f41c-d02f-915a-49f219f95356",
+			"headers": "x-auth-token: {{token}}\n",
+			"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "var data = JSON.parse(responseBody);\n\nif (data.response.progress) {\n  tests[\"Body has progress\"] = true;\n  postman.setEnvironmentVariable(\"pathId\", data.response.progress);\n}\nelse {\n  tests[\"Body has progress\"] = false;\n}",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1452133143612,
+			"name": "https://{{apic}}:{{port}}/api/v1/task",
+			"description": "Gets a task status.\nuses environment variable for the taskId",
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+			"responses": []
 		},
 		{
 			"id": "63baeb3e-2413-f2e2-3308-60427666de4f",
@@ -147,6 +282,215 @@
 			"currentHelper": "normal",
 			"helperAttributes": {},
 			"folder": "16f91b98-71a2-2733-e92d-8a1ecd0afc4b"
+		},
+		{
+			"id": "a14f190f-0ad3-5f8f-2c6c-b8b214b45028",
+			"headers": "x-auth-token: {{token}}\n",
+			"url": "https://{{apic}}:{{port}}/api/v1/flow-analysis/{{pathId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1452133303271,
+			"name": "https://{{apic}}:{{port}}/api/v1/flow-analysis/{{pathId}}",
+			"description": "Gets a flow-analyis\nuses environment variable for the pathId",
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+			"responses": [
+				{
+					"status": "",
+					"responseCode": {
+						"code": 200,
+						"name": "OK",
+						"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+					},
+					"time": 3414,
+					"headers": [
+						{
+							"name": "Cache-Control",
+							"key": "Cache-Control",
+							"value": "no-cache, no-store",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"name": "Connection",
+							"key": "Connection",
+							"value": "close",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "Pragma",
+							"key": "Pragma",
+							"value": "no-cache",
+							"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+						},
+						{
+							"name": "Strict-Transport-Security",
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000; includeSubDomains",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"name": "X-Frame-Options",
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN",
+							"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+						}
+					],
+					"cookies": [],
+					"mime": "",
+					"text": "{\"response\":{\"request\":{\"sourceIP\":\"65.1.1.83\",\"destIP\":\"212.1.10.20\"},\"lastUpdate\":\"Thu Jan 07 02:16:05 UTC 2016\",\"properties\":[],\"networkElementsInfo\":[{\"id\":\"cf05d21e-29bc-4b9d-8a32-12f7877a8355\",\"type\":\"wireless\",\"ip\":\"65.1.1.83\",\"linkInformationSource\":\"Switched\"},{\"id\":\"0a15fd77-44ba-4858-b3b1-0df37c4328e0\",\"name\":\"AP7081.059f.19ca\",\"type\":\"Unified AP\",\"ip\":\"55.1.1.3\",\"role\":\"ACCESS\",\"linkInformationSource\":\"Switched\",\"tunnels\":[\"CAPWAP Tunnel\"]},{\"id\":\"93a73198-850b-4002-bbf3-a224befae61d\",\"name\":\"CAMPUS-Access1\",\"type\":\"Switches and Hubs\",\"ip\":\"212.1.10.1\",\"ingressInterface\":{\"physicalInterface\":{\"id\":\"101550de-e72c-4071-81f7-3e2f4f3fbf62\",\"name\":\"GigabitEthernet1/0/26\"}},\"egressInterface\":{\"physicalInterface\":{\"id\":\"ea919b9d-cf40-41b9-83bc-42e1ea07806e\",\"name\":\"GigabitEthernet1/0/1\"}},\"role\":\"ACCESS\",\"linkInformationSource\":\"Switched\",\"tunnels\":[\"CAPWAP Tunnel\"]},{\"id\":\"b3aa8311-62f5-44a3-b432-fa857324f447\",\"name\":\"CAMPUS-Dist1\",\"type\":\"Switches and Hubs\",\"ip\":\"55.1.1.100\",\"ingressInterface\":{\"physicalInterface\":{\"id\":\"07132e28-404b-4335-8682-28fd294c06cf\",\"name\":\"GigabitEthernet5/5\"}},\"egressInterface\":{\"physicalInterface\":{\"id\":\"92615402-430b-4ec9-b7b8-4441818fba41\",\"name\":\"GigabitEthernet5/38\"}},\"role\":\"BORDER ROUTER\",\"linkInformationSource\":\"Switched\",\"tunnels\":[\"CAPWAP Tunnel\"]},{\"id\":\"e2c0cc49-f9a5-45b5-8884-825df2b8f40a\",\"name\":\"Campus-WLC-5508\",\"type\":\"Wireless Controller\",\"ip\":\"172.28.97.253\",\"ingressInterface\":{\"physicalInterface\":{\"id\":\"6d10cfb0-7428-452d-b1f6-419fe8532315\",\"name\":\"GigabitEthernet0/0/1\"}},\"egressInterface\":{\"physicalInterface\":{\"id\":\"6d10cfb0-7428-452d-b1f6-419fe8532315\",\"name\":\"GigabitEthernet0/0/1\"}},\"role\":\"CORE\",\"linkInformationSource\":\"Switched\",\"tunnels\":[\"CAPWAP Tunnel\"]},{\"id\":\"b3aa8311-62f5-44a3-b432-fa857324f447\",\"name\":\"CAMPUS-Dist1\",\"type\":\"Switches and Hubs\",\"ip\":\"55.1.1.100\",\"ingressInterface\":{\"physicalInterface\":{\"id\":\"92615402-430b-4ec9-b7b8-4441818fba41\",\"name\":\"GigabitEthernet5/38\"},\"virtualInterface\":[{\"id\":\"dc4b7148-ae44-4213-a074-15765749270c\",\"name\":\"Vlan600\"}]},\"egressInterface\":{\"physicalInterface\":{\"id\":\"07132e28-404b-4335-8682-28fd294c06cf\",\"name\":\"GigabitEthernet5/5\"},\"virtualInterface\":[{\"id\":\"86511766-2235-424c-8254-e41eb5f4304c\",\"name\":\"Vlan200\"}]},\"role\":\"BORDER ROUTER\",\"linkInformationSource\":\"InterVlan Routing\"},{\"id\":\"93a73198-850b-4002-bbf3-a224befae61d\",\"name\":\"CAMPUS-Access1\",\"type\":\"Switches and Hubs\",\"ip\":\"212.1.10.1\",\"ingressInterface\":{\"physicalInterface\":{\"id\":\"ea919b9d-cf40-41b9-83bc-42e1ea07806e\",\"name\":\"GigabitEthernet1/0/1\"}},\"egressInterface\":{\"physicalInterface\":{\"id\":\"2a0d27aa-5139-4512-9559-1b38a51b2204\",\"name\":\"GigabitEthernet1/0/47\"}},\"role\":\"ACCESS\",\"linkInformationSource\":\"Switched\"},{\"id\":\"8c989306-818e-488f-9974-1476be6ca7b5\",\"type\":\"wired\",\"ip\":\"212.1.10.20\"}]},\"version\":\"1.0\"}",
+					"language": "javascript",
+					"rawDataType": "text",
+					"state": {
+						"size": "normal"
+					},
+					"previewType": "html",
+					"searchResultScrolledTo": -1,
+					"forceNoPretty": false,
+					"write": true,
+					"empty": false,
+					"failed": false,
+					"isSample": true,
+					"scrollToResult": true,
+					"runTests": true,
+					"id": "a2dbffb0-2a6d-4f2e-a570-cbe83b339a03",
+					"name": "flow",
+					"request": {
+						"url": "https://sandboxapic.cisco.com:9443/api/v1/flow-analysis/643e858b-0010-4ac8-b3d8-6f29bf2eb095",
+						"headers": [
+							{
+								"key": "x-auth-token",
+								"value": "ST-578-P7dWDPvQNBwwZ09Kkvyh-cas",
+								"name": "x-auth-token",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "b9d52458-e0f0-511f-9334-8ea9ab1d9bb5"
+							}
+						],
+						"data": "{\n    \"sourceIP\" : \"65.1.1.83\", \"destIP\" : \"212.1.10.20\"\n}",
+						"method": "GET",
+						"dataMode": "params"
+					}
+				}
+			]
+		},
+		{
+			"id": "af654056-5935-e479-5a88-554b41226013",
+			"headers": "x-auth-token: {{token}}\n",
+			"url": "https://{{apic}}:{{port}}/api/v1/tag",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response);\nif (data.response) {\n  tests[\"Body has response\"] = true;\n  var L = data.response.length;\n    for (var i = 0; i < L; i++) {\n    var obj = data.response[i];\n    if (obj.tag == \"InterestingAP\") {\n           postman.setEnvironmentVariable(\"tagId\", obj.id);\n       } \n}\n  \n}\nelse {\n  tests[\"Body has response\"] = false;\n}\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1452067072353,
+			"name": "https://{{apic}}:{{port}}/api/v1/tag",
+			"description": "Gets a list of all tags defined on the controller",
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+			"responses": []
+		},
+		{
+			"id": "b07fc42a-f69a-4823-d4e2-58f42b697597",
+			"headers": "x-auth-token: {{token}}\n",
+			"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+			"data": [],
+			"dataMode": "params",
+			"name": "https://{{apic}}:{{port}}/api/v1/task - TAG",
+			"description": "Gets a task status.\nuses environment variable for the taskId",
+			"descriptionFormat": "html",
+			"time": 1452053140585,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "dc092524-0a01-9ca6-b614-dfb06fb7482c"
+		},
+		{
+			"id": "c103dc0c-0a41-6a78-9262-cf662a1925cd",
+			"headers": "x-auth-token: {{token}}\nContent-type: application/json\n",
+			"url": "https://{{apic}}:{{port}}/api/v1/tag/association",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1452064949765,
+			"name": "https://{{apic}}:{{port}}/api/v1/tag/association ",
+			"description": "Associates an existing tag with a network-device.\n\nTag needs to have been created before it can be associated",
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+			"responses": [],
+			"rawModeData": "{\n  \"resourceId\": \"0a15fd77-44ba-4858-b3b1-0df37c4328e0\",\n\"resourceType\" : \"network-device\",\n  \"tag\": \"InterestingAP\"\n\n}"
+		},
+		{
+			"id": "c88c8ca5-c412-526d-6ec7-1a2f38ac691c",
+			"headers": "x-auth-token: {{token}}\n",
+			"url": "https://{{apic}}:{{port}}/api/v1/tag/{{tagId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "var data1 = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data1.response.taskId);\n\npostman.setEnvironmentVariable(\"taskId\", data1.response.taskId);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1452067170281,
+			"name": "https://{{apic}}:{{port}}/api/v1/tag",
+			"description": "delete tag from controller",
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+			"responses": []
+		},
+		{
+			"id": "ff853d35-1112-5293-b1dc-ab3f00002f1d",
+			"headers": "x-auth-token: {{token}}\nContent-type: application/json\n",
+			"url": "https://{{apic}}:{{port}}/api/v1/tag",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1452064938505,
+			"name": "https://{{apic}}:{{port}}/api/v1/tag POST",
+			"description": "Creates a new tag on the controller",
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+			"responses": [],
+			"rawModeData": "{ \"tag\" : \"InterestingAP\" }"
 		}
 	]
 }
