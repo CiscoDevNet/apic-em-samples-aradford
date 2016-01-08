@@ -29,3 +29,7 @@ Some tasks, when successful, will return an ID of the resource that was created.
 Where this is required for later use, I capture this in an environment variable.
 If you click on the Environment variables quickview, you can see the variables that have been created.
 For example, projectId will be used to delete a project later on, as well as to add devices to a PNP project.
+
+#Next Steps
+You can create your own environment, or modify the existing one to point to your own server.
+Note: the port 9443, will likely need to be changed as well as the server ip-address/name
