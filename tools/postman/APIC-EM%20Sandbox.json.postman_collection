@@ -44,7 +44,8 @@
 				"b63785e3-cbab-6a4f-7ffa-76abe2af61d7",
 				"40bc6735-e895-ca6a-3588-68208c7ad511",
 				"aa8a368a-5a37-dca3-78db-0ccdaf56de79",
-				"2a2ac532-7315-6746-a3bd-259fd15eb4bd"
+				"2a2ac532-7315-6746-a3bd-259fd15eb4bd",
+				"02ab2345-0662-93d0-6521-a2d824a23669"
 			],
 			"owner": 0,
 			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c"
@@ -114,6 +115,25 @@
 			"responses": []
 		},
 		{
+			"id": "02ab2345-0662-93d0-6521-a2d824a23669",
+			"headers": "x-auth-token: {{token}}\n",
+			"url": "https://{{apic}}:{{port}}/api/v1/location/{{locationId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "var data1 = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data1.response.taskId);\n\npostman.setEnvironmentVariable(\"taskId\", data1.response.taskId);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1452293188293,
+			"name": "https://{{apic}}:{{port}}/api/v1/location{{locaitonId}}",
+			"description": "deletes the location create earlier.\nUses locationId environment varaible",
+			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
+			"responses": []
+		},
+		{
 			"id": "1df23eb9-91bb-d19b-9ab1-17b8ab9f3ed8",
 			"headers": "x-auth-token: {{token}}\n",
 			"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
@@ -135,7 +155,7 @@
 		{
 			"id": "2a2ac532-7315-6746-a3bd-259fd15eb4bd",
 			"headers": "x-auth-token: {{token}}\n",
-			"url": "https://{{apic}}:{{port}}/api/v1/network-device/0a15fd77-44ba-4858-b3b1-0df37c4328e0/location",
+			"url": "https://{{apic}}:{{port}}/api/v1/network-device/{{deviceId}}/location",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "DELETE",
@@ -145,9 +165,9 @@
 			"tests": "var data1 = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data1.response.taskId);\n\npostman.setEnvironmentVariable(\"taskId\", data1.response.taskId);",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1452150854219,
+			"time": 1452292948645,
 			"name": "https://{{apic}}:{{port}}/api/v1/network-device/",
-			"description": "Gets a task status.\nuses environment variable for the taskId",
+			"description": "deletes a location from the network device.\n- deviceId is in the environement and was use to add the location\n- locationId was captured when the location was created",
 			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
 			"responses": []
 		},
@@ -215,7 +235,7 @@
 		{
 			"id": "323ab275-ba17-70fa-1a9e-c2f9e4503003",
 			"headers": "x-auth-token: {{token}}\n",
-			"url": "https://{{apic}}:{{port}}/api/v1/tag/association/{{tagId}}?resourceType=network-device&resourceId=0a15fd77-44ba-4858-b3b1-0df37c4328e0",
+			"url": "https://{{apic}}:{{port}}/api/v1/tag/association/{{tagId}}?resourceType=network-device&resourceId={{deviceId}}",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "DELETE",
@@ -225,7 +245,7 @@
 			"tests": "var data1 = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data1.response.taskId);\n\npostman.setEnvironmentVariable(\"taskId\", data1.response.taskId);",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1452067179232,
+			"time": 1452292906141,
 			"name": "https://{{apic}}:{{port}}/api/v1/tag/association ",
 			"description": "Deletes association between tag and device\n\nyou need to delete the association before you can delete the tag",
 			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
@@ -587,12 +607,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1452150647949,
+			"time": 1452292930080,
 			"name": "https://{{apic}}:{{port}}/api/v1/network-device/location",
-			"description": "Gets a task status.\nuses environment variable for the taskId\n\nLooks for progress field as it contains the ID of the newly created locaiton\nthis is stored in locationId environment variable",
+			"description": "Adds a location to a network-device, with Id of deviceId.\n\nThe deviceId in the environment needs to be changed if not using the sandbox.\n\nLooks for progress field as it contains the ID of the newly created locaiton\nthis is stored in locationId environment variable",
 			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
 			"responses": [],
-			"rawModeData": "{ \n\"id\" : \"0a15fd77-44ba-4858-b3b1-0df37c4328e0\",\n\"location\" : \"{{locationId}}\"\n}"
+			"rawModeData": "{ \n\"id\" : \"{{deviceId}}\",\n\"location\" : \"{{locationId}}\"\n}"
 		},
 		{
 			"id": "af654056-5935-e479-5a88-554b41226013",
@@ -690,12 +710,12 @@
 			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1452064949765,
+			"time": 1452292890228,
 			"name": "https://{{apic}}:{{port}}/api/v1/tag/association ",
-			"description": "Associates an existing tag with a network-device.\n\nTag needs to have been created before it can be associated",
+			"description": "Associates an existing tag with a network-device.\n\nTag needs to have been created before it can be associated\n\nnetwork-device is the deviceId environment variable, you need to change this",
 			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c",
 			"responses": [],
-			"rawModeData": "{\n  \"resourceId\": \"0a15fd77-44ba-4858-b3b1-0df37c4328e0\",\n\"resourceType\" : \"network-device\",\n  \"tag\": \"InterestingAP\"\n\n}"
+			"rawModeData": "{\n  \"resourceId\": \"{{deviceId}}\",\n\"resourceType\" : \"network-device\",\n  \"tag\": \"InterestingAP\"\n\n}"
 		},
 		{
 			"id": "c10f1ebc-d1e5-d6da-276a-26a897082012",
