@@ -15,6 +15,11 @@ Once you have done this, you need to first run the request to get a Ticket.  Thi
 The authentication token will then be used in subsequent requests.
 ![alt tag](images/firstRequest.png)
 
+*NOTE: If this request fails you may need to accept the certificate from the controller in your browser*
+http://blog.getpostman.com/2014/01/28/using-self-signed-certificates-with-postman/
+
+
+
 Inside each folder, the requests are sequential.  GET/POST/DELETE etc.  So you can run through them one by one.
 You can also check on the UI for the controller to see the effect of the requests.
 
