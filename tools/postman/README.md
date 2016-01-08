@@ -19,7 +19,6 @@ The authentication token will then be used in subsequent requests.
 http://blog.getpostman.com/2014/01/28/using-self-signed-certificates-with-postman/
 
 
-
 Inside each folder, the requests are sequential.  GET/POST/DELETE etc.  So you can run through them one by one.
 You can also check on the UI for the controller to see the effect of the requests.
 
