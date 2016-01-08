@@ -8,7 +8,7 @@ You need to import the collection as well as the environment.  You can download 
 * https://raw.githubusercontent.com/CiscoDevNet/apic-em-samples-aradford/master/tools/postman/APIC-EM%2520Sandbox.postman_environment
 * https://raw.githubusercontent.com/CiscoDevNet/apic-em-samples-aradford/master/tools/postman/APIC-EM%2520Sandbox.json.postman_collection
 
-!(./importing.png)
+![alt tag](images/importing.png)
 
 #Getting Started
 Once you have done this, you need to first run the request to get a Ticket.  This request is in the 1.Ticket folder.
