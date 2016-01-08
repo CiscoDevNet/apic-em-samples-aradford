@@ -1,8 +1,15 @@
+#Introduction
 To use these examples, you need the latest version of postman (3.2.0).
 It has free Jetpacks support.  This is required for linking requests.
 
-You need to import the collection as well as the environment.
+#Importing
+You need to import the collection as well as the environment.  You can download or import the raw git files.
+https://raw.githubusercontent.com/CiscoDevNet/apic-em-samples-aradford/master/tools/postman/APIC-EM%2520Sandbox.postman_environment
+https://raw.githubusercontent.com/CiscoDevNet/apic-em-samples-aradford/master/tools/postman/APIC-EM%2520Sandbox.json.postman_collection
 
+(importing.png)
+
+#Getting Started
 Once you have done this, you need to first run the request to get a Ticket.  This request is in the 1.Ticket folder.
 The authentication token will then be used in subsequent requests.
 
