@@ -21,5 +21,5 @@ if __name__ == "__main__":
     response = main()
     for interface in response['response']:
         if interface['ipv4Address']:
-            print interface['ipv4Address'], interface['ipv4Mask'], \
-                interface['portName']
+            print '{0:16}/{1:16} {2:20}'.format(interface['ipv4Address'], interface['ipv4Mask'], \
+                interface['portName'])

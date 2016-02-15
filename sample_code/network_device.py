@@ -20,5 +20,5 @@ def list_network_devices():
 if __name__ == "__main__":
     response = list_network_devices()
     for device in response['response']:
-        print device['hostname'], device['managementIpAddress'], \
-            device['platformId']
+        print "{0:30} {1:16} {2:15}".format(device['hostname'], device['managementIpAddress'], \
+            device['platformId'])
