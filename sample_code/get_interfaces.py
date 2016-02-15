@@ -15,11 +15,11 @@ def main():
         print "Error processing request", cerror
         sys.exit(1)
 
-    for interface in response.json()['response']:
-        if interface['ipv4Address']:
-
-            print interface['ipv4Address'], interface['ipv4Mask'], \
-                interface['portName']
+    return response.json()
 
 if __name__ == "__main__":
-    main()
+    response = main()
+    for interface in response['response']:
+        if interface['ipv4Address']:
+            print interface['ipv4Address'], interface['ipv4Mask'], \
+                interface['portName']

@@ -4,7 +4,7 @@ import sys
 from apic import get_auth_token, create_url
 
 
-def main():
+def list_network_devices():
     url = create_url(path="network-device")
     print url
     token = get_auth_token()
@@ -15,9 +15,10 @@ def main():
         print "Error processing request", cerror
         sys.exit(1)
 
-    for device in response.json()['response']:
-        print device['hostname'], device['managementIpAddress'], \
-            device['platformId']
+    return response.json()
 
 if __name__ == "__main__":
-    main()
+    response = list_network_devices()
+    for device in response['response']:
+        print device['hostname'], device['managementIpAddress'], \
+            device['platformId']
