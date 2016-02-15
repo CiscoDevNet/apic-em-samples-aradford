@@ -1,0 +1,36 @@
+hostname 2960-client
+username sdn privilege 15 password 0 sdn123
+
+interface GigabitEthernet1/0/47
+ ip device tracking maximum 1
+!
+interface GigabitEthernet1/0/48
+!
+interface GigabitEthernet1/0/49
+!
+interface GigabitEthernet1/0/50
+!
+interface TenGigabitEthernet1/0/1
+!
+interface TenGigabitEthernet1/0/2
+!
+!
+ip http server
+ip http secure-server
+!
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ password cisco
+ login local
+ transport input telnet ssh
+line vty 5 15
+ password cisco
+ login local
+ transport input telnet ssh
+!
+end
+
