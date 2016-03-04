@@ -292,13 +292,12 @@
 			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1452136111505,
+			"time": 1457130051271,
 			"name": "https://{{apic}}:{{port}}/api/v1/flow-analysis",
 			"description": "Creates a flow analysis.  sourceIP and destIP are specified.\n\nsrc/dst port can also be provided",
 			"collectionId": "f2754ae6-5588-050b-4442-61bf4cd97622",
 			"responses": [],
-			"rawModeData": "{   \"sourceIP\" : \"65.1.1.83\", \"destIP\" : \"212.1.10.20\"}",
-			"folder": "f4bb8f93-267e-25a4-0f0f-9ccd723a1c0f"
+			"rawModeData": "{   \"sourceIP\" : \"65.1.1.46\", \"destIP\" : \"212.1.10.20\"}"
 		},
 		{
 			"id": "34c06de6-2b57-879e-85d0-84af02028d5d",

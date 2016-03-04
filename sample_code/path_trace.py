@@ -12,7 +12,7 @@ def path_trace():
     '''
     url = create_url(path="flow-analysis")
     print url
-    data = {"sourceIP" : "65.1.1.83", "destIP" : "212.1.10.20"}
+    data = {"sourceIP" : "65.1.1.46", "destIP" : "212.1.10.20"}
     token = get_auth_token()
     headers = {'X-auth-token' : token['token'],
                'Content-Type' : 'application/json'}
@@ -24,6 +24,7 @@ def path_trace():
         sys.exit(1)
 
     taskid = response.json()['response']['taskId']
+    print "Waiting for Task %s" % taskid
     task_result = wait_on_task(taskid, token)
     flow_id = task_result['progress']
     url = create_url(path="flow-analysis/%s" % flow_id)
