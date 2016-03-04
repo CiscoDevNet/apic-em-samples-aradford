@@ -23,7 +23,7 @@ def list_files(namespace):
 
 if __name__ == "__main__":
     file_response = list_files("config")
-    print '{0:30}:{1:15} {2:10}'.format('name','fileFormat','fileSize')
-    for project in file_response['response']:
+    print '{0:30}:{1:15} {2:10} {3:32}'.format('name','fileFormat','fileSize', 'id')
+    for file in file_response['response']:
         #print json.dumps(project, indent=2)
-        print '{0:30}:{1:15} {2:10}'.format(project['name'], project['fileFormat'], project['fileSize'])
+        print '{0:30}:{1:15} {2:10} {3:32}'.format(file['name'], file['fileFormat'], file['fileSize'], file['id'])

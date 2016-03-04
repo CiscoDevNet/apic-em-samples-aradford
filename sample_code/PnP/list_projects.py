@@ -12,7 +12,7 @@ def list_projects():
     token = get_auth_token()
 
     url = create_url(path="pnp-project")
-    print "Getting %s", url
+    print "Getting %s" % url
     headers= { 'x-auth-token': token['token']}
     try:
         response = requests.get(url, headers=headers, verify=False)
@@ -22,7 +22,7 @@ def list_projects():
     return response.json()
 if __name__ == "__main__":
     response = list_projects()
-    print '{0:10}:{1:10} {2:3}'.format('siteName','state','deviceCount')
+    print '{0:16} {1:15} {2:12} {3:32}'.format('siteName','state','deviceCount', 'id')
     for project in response['response']:
         #print json.dumps(project, indent=2)
-        print '{0:10}:{1:10} {2:3}'.format(project['siteName'], project['state'], project['deviceCount'])
+        print '{0:16} {1:15} {2:12} {3:32}'.format(project['siteName'], project['state'], project['deviceCount'], project['id'])
