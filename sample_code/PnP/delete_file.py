@@ -6,14 +6,13 @@ import os.path, sys
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 from apic import get_auth_token, create_url
 
-SAMPLE_FILE = "test_files/config/2960-client.txt"
 
 def delete_file(namespace, fileid):
     token = get_auth_token()
 
     url = create_url(path="file/%s" % fileid)
 
-    print "DELETE %s", url
+    print "DELETE %s" % url
     headers= { 'x-auth-token': token['token']}
 
     try:

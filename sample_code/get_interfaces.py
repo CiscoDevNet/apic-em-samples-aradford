@@ -18,8 +18,10 @@ def main():
     return response.json()
 
 if __name__ == "__main__":
-    response = main()
-    for interface in response['response']:
+    interface_response = main()
+    for interface in interface_response['response']:
         if interface['ipv4Address']:
-            print '{0:16}/{1:16} {2:20}'.format(interface['ipv4Address'], interface['ipv4Mask'], \
-                interface['portName'])
+            print '{0:16}/{1:16} {2:20}'.\
+                format(interface['ipv4Address'],
+                       interface['ipv4Mask'],
+                       interface['portName'])

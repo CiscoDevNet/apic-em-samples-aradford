@@ -8,6 +8,9 @@ import os.path, sys
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 from apic import get_auth_token, create_url
 
+# this is a sample file to upload.
+SAMPLE_FILE = "test_files/config/2960-client.txt"
+
 def upload_file(namespace, filepath):
     token = get_auth_token()
 
@@ -20,7 +23,7 @@ def upload_file(namespace, filepath):
 
     url = create_url(path="file/%s" % namespace)
 
-    print "POST %s", url
+    print "POST %s" % url
     headers= { 'x-auth-token': token['token']}
 
     try:

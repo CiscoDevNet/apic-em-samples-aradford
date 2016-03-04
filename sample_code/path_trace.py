@@ -5,16 +5,20 @@ import json
 from apic import get_auth_token, create_url, wait_on_task
 
 
-def main():
+def path_trace():
+    '''
+
+    :return: the result of path trace
+    '''
     url = create_url(path="flow-analysis")
     print url
     data = {"sourceIP" : "65.1.1.83", "destIP" : "212.1.10.20"}
     token = get_auth_token()
     headers = {'X-auth-token' : token['token'],
-               'Content-Type' : 'application/json'
-               }
+               'Content-Type' : 'application/json'}
     try:
-        response = requests.post(url, data=json.dumps(data), headers=headers, verify=False)
+        response = requests.post(url, data=json.dumps(data),
+                                 headers=headers, verify=False)
     except requests.exceptions.RequestException as cerror:
         print "Error processing request", cerror
         sys.exit(1)
@@ -29,8 +33,9 @@ def main():
         print "Error processing request", cerror
         sys.exit(1)
 
-    for node in response.json()['response']['networkElementsInfo']:
-        print json.dumps(node, indent = 2)
+    return response.json()
 
 if __name__ == "__main__":
-    main()
+    path_response = path_trace()
+    for node in path_response['response']['networkElementsInfo']:
+        print json.dumps(node, indent=2)
