@@ -73,7 +73,7 @@ def wait_on_task(task_id, token, timeout=(3*RETRY_INTERVAL), retry_interval=RETR
                 raise TaskTimeoutError("Task %s did not complete within the specified timeout "
                                        "(%s seconds)" % (task_id, timeout))
 
-            print("Task=%s has not completed yet. Sleeping %s seconds...", task_id, retry_interval)
+            print("Task=%s has not completed yet. Sleeping %s seconds..." %(task_id, retry_interval))
             time.sleep(retry_interval)
 
         if response['isError'] == True:
