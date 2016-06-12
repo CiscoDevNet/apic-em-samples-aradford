@@ -2,14 +2,14 @@
 Uniq is a python3 client library for APIC-EM.
 
 ### Download
-Clone this repository:
+Clone the uniq repository:
 
 ``` bash
 git clone https://github.com/CiscoDevNet/uniq.git
 ```
 
 ### Install a virtualenv
-This optional step will create a virtual environement for uniq
+This optional step will create a virtual environment for uniq
 
 ``` bash
 pyvenv env
