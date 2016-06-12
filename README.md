@@ -16,7 +16,7 @@ There are two different types of examples.  tools and sample python code
 
 ##tools/postman: 
 
-[toosl/postman](tools/postman/)contains a collection of postman requests.  These use dynamic variables to link requests together.  This
+[toosl/postman](tools/postman/) contains a collection of postman requests.  These use dynamic variables to link requests together.  This
 is particularly useful for authentication and asychronous requests, where a taskId is returned.
 
 ##uniq_samples:

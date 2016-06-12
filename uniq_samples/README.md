@@ -1,5 +1,7 @@
 # Uniq Sample code
-Uniq is a python3 client library for APIC-EM.
+Uniq is a python3 client library for APIC-EM.  This directory contains some sample scripts in 
+[code_samples](code_samples/).  To use these samples, you first need to install uniq.  It is recommended that you use
+a virtualenv to do this.  This is only a recommendation.
 
 ### Download
 Clone the uniq repository:
@@ -27,20 +29,28 @@ python3 setup.py install
 ### Use
 Import the package and make an API call.
 
-``` python
-from uniq.apis.nb.client_manager import NbClientManager
 
-client = NbClientManager(
-    server="1.1.1.1",
-    username="username",
-    password="password",
-    connect=True)
+``` bash
 
-# NorthBound API call to get all users
-user_list_result = client.user.getUsers()
+# if you were in the uniq installation directory
+$ cd .. 
 
-# Serialize the model object to a python dictionary
-users = client.serialize(user_list_result)
+$ ls
+README.md	__init__.py	code_samples uniq env
 
-print(users)
+$ cd code_samples
+
+# now you can run the first example
+$ python3 00_get_network_device.py 
+IP Address       Device Name     
+55.1.1.3         AP7081.059f.19ca
+212.1.10.1       CAMPUS-Access1  
+10.204.61.2      CAMPUS-Core1    
+211.2.1.1        CAMPUS-Core2    
+212.1.10.100     CAMPUS-Dist1    
+212.1.20.2       CAMPUS-Dist2    
+210.1.1.1        CAMPUS-Router1  
+210.2.1.1        CAMPUS-Router2  
+55.1.1.2         Campus-WLC-5508 
+
 ```
