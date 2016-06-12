@@ -2,7 +2,7 @@
 
 This is a collection of sample scripts and tools for APIC-EM.  
 
-# Getting Started
+## Getting Started
 
 
 ### Download
