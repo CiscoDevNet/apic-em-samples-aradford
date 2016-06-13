@@ -1,7 +1,7 @@
 # Uniq Sample code
 Uniq is a python3 client library for APIC-EM.  This directory contains some sample scripts in 
 [code_samples](code_samples/).  To use these samples, you first need to install uniq.  It is recommended that you use
-a virtualenv to do this.  This is only a recommendation.
+a virtualenv to do this.  This is only a recommendation, not a requirement.
 
 ### Download
 Clone the uniq repository:
@@ -27,8 +27,7 @@ python3 setup.py install
 ```
 
 ### Use
-Import the package and make an API call.
-
+Just need to change into the appropriate directory and run the scripts
 
 ``` bash
 
@@ -53,4 +52,16 @@ IP Address       Device Name
 210.2.1.1        CAMPUS-Router2  
 55.1.1.2         Campus-WLC-5508 
 
+```
+
+Note: if you see an error message 
+``` bash
+copying apis/nb/clients/topology_client/vrf.json -> build/lib/uniq/apis/nb/clients/topology_client
+error: can't copy 'opyright': doesn't exist or not a regular file
+
+```
+You need to update your installtools
+
+``` bash
+$ pip3 install -U setuptools
 ```
