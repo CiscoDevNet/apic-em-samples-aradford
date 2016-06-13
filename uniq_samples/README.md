@@ -25,6 +25,17 @@ Then install the package locally.
 cd uniq
 python3 setup.py install
 ```
+Note: if you see an error message 
+``` bash
+copying apis/nb/clients/topology_client/vrf.json -> build/lib/uniq/apis/nb/clients/topology_client
+error: can't copy 'opyright': doesn't exist or not a regular file
+
+```
+You need to update your installtools
+
+``` bash
+$ pip3 install -U setuptools
+```
 
 ### Use
 Just need to change into the appropriate directory and run the scripts
@@ -54,14 +65,3 @@ IP Address       Device Name
 
 ```
 
-Note: if you see an error message 
-``` bash
-copying apis/nb/clients/topology_client/vrf.json -> build/lib/uniq/apis/nb/clients/topology_client
-error: can't copy 'opyright': doesn't exist or not a regular file
-
-```
-You need to update your installtools
-
-``` bash
-$ pip3 install -U setuptools
-```
