@@ -1,0 +1,14 @@
+# Commands to get going
+# copy the repo
+git clone https://github.com/CiscoDevNet/apic-em-samples-aradford.git
+
+# create a virtualenv
+cd apic-em-samples-aradford
+virtualenv env
+source env/bin/activate
+
+# install the requirements
+cd sample_code
+pip install -r requirements.txt
+
+# change the apic_config.py file to point to your own controller if you like
