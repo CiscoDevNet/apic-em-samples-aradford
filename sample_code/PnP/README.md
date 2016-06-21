@@ -69,14 +69,14 @@ to create the configuration files, run the "build_templates.py" command.
 ``` bash
 $ ./build_templates.py 
 {'platformId': 'WS-C2960X-48FPD-L', 'hostName': 'sw01', 'ipAddress': '10.10.10.101', 'site': 'Sydney', 'serialNumber': '12345678901'}
-wrote file: test_files/configs/sw01-config-6130
+wrote file: work_files/configs/sw01-config-6130
 {'platformId': 'WS-C2960X-48FPD-L', 'hostName': 'sw02', 'ipAddress': '10.10.10.102', 'site': 'Sydney', 'serialNumber': '22345678901'}
-wrote file: test_files/configs/sw02-config-6130
+wrote file: work_files/configs/sw02-config-6130
 {'platformId': 'WS-C2960X-48FPD-L', 'hostName': 'sw03', 'ipAddress': '10.10.10.103', 'site': 'Melbourne', 'serialNumber': '32345678901'}
-wrote file: test_files/configs/sw03-config-6130
+wrote file: work_files/configs/sw03-config-6130
 ```
 
-The output of these files is in the [test-files/configs](test-files/configs) directory.  There will be three files created. 
+The output of these files is in the [work_files/configs](work_files/configs) directory.  There will be three files created. 
 "6130" is the suffix that was created for me.
 
 ## Upload File
@@ -242,10 +242,13 @@ You can look at the controller to see the project and the rules that have been c
 ![uniq](pnp-screenshot.png?raw=true "uniq")
 Similarly you can "list_project.py" to see the list of projects or "list_project.py Sydney-6130" to see the rules for a project.
 
-## clean up
+## Clean up
 Once you are done, you can run the "delete_file.py -a" and the "delete_project.py -a" to remove the files and the projects from the controller.
 NOTE: you do not have to remove the rules as the arguments provided to the "delete_project" API call will remove all rules.
 
+##Next Steps
+This is an educational example where the steps have been broken out for clarity.  This does require some extra work in the code, as I have to lookup 
+file and project names to resolve their UUID, where as an "all-in-one" version would keep the UUID of the resource that has been created.
 
  
 

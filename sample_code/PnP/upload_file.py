@@ -11,7 +11,7 @@ from name_wrapper import name_wrap
 from pnp_config import CONFIGS_DIR
 
 # this is a sample file to upload.
-SAMPLE_FILE = "test_files/config/2960-client.txt"
+SAMPLE_FILE = "work_files/config/2960-client.txt"
 
 def upload_file(namespace, filepath):
     token = get_auth_token()
