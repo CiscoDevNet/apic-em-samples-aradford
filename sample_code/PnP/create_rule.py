@@ -74,6 +74,6 @@ if __name__ == "__main__":
             f.close()
 
     else:
-        response = create_project_rule(name_wrap("Sydney"), serial=name_wrap("12345678910"),
+        response = create_project_rule(name_wrap("Canberra"), serial=name_wrap("12345678910", fixed_len=True ),
                                        platform="2960x", host="device", )
         print(json.dumps(response, indent=2))

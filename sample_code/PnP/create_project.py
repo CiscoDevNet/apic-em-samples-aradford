@@ -39,5 +39,5 @@ if __name__ == "__main__":
             response = create_project(name_wrap(project))
             print (json.dumps(response, indent=2))
     else:
-        response = create_project(name_wrap("Sydney"))
+        response = create_project(name_wrap("Canberra"))
         print (json.dumps(response, indent=2))
