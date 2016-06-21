@@ -36,8 +36,8 @@ serial number.
 
 ## Build Templates
 First step it to build configuration templates.  There are two files used here:  
-- [test-files/templates/config_template.jnj](test-files/templates/config_template.jnj) is a jinja2 template file.
-- [test-files/inventory.csv](test-files/inventory.csv) is a csv file with an entry for each network device.
+- [work_files/templates/config_template.jnj](work_files/templates/config_template.jnj) is a jinja2 template file.
+- [work_files/inventory.csv](work_files/inventory.csv) is a csv file with an entry for each network device.
 
 The template is very simple, and just illustrates the use of variables.  These variables correspond to the column names of the csv file. In
 this case "hostname" and "ipAddress" are two variables that come from the inventory file.
