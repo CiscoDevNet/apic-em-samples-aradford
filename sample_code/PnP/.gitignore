@@ -1,0 +1,6 @@
+# suffix file
+suffix.py
+
+# Python Related
+# __pycache__/
+# *.py[cod]

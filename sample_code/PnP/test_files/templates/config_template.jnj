@@ -1,0 +1,12 @@
+hostname {{hostName|lower}}
+
+enable password cisco123
+!
+username cisco password 0 cisco123
+no aaa new-model
+
+int vlan 1
+ip address {{ipAddress}}
+
+!
+end
