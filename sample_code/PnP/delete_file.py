@@ -31,6 +31,7 @@ if __name__ == "__main__":
         filetuple = [(file['name'], file['id']) for file in filelist]
 
         for filename in os.listdir(CONFIGS_DIR):
+            if  not filename.startswith('.'):
                 print("deleting %s" %filename)
                 try:
                     fileid = [ id for fn, id in filetuple if fn == filename][0]

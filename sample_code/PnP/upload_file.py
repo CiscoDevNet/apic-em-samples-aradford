@@ -39,7 +39,7 @@ if __name__ == "__main__":
     if len(sys.argv) >1  and sys.argv[1] == "-a":
         for filename in os.listdir(CONFIGS_DIR):
             file = "%s/%s" % (CONFIGS_DIR, filename)
-            if os.path.isfile(file):
+            if os.path.isfile(file) and  not filename.startswith('.'):
                 response = upload_file("config", file)
                 print(json.dumps(response['response'], indent=2))
     else:
