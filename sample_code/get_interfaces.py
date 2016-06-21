@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import requests
 import sys
 from apic import get_auth_token, create_url
@@ -21,7 +22,7 @@ if __name__ == "__main__":
     interface_response = main()
     for interface in interface_response['response']:
         if interface['ipv4Address']:
-            print '{0:16}/{1:16} {2:20}'.\
+            print ('{0:16}/{1:16} {2:20}'.\
                 format(interface['ipv4Address'],
                        interface['ipv4Mask'],
-                       interface['portName'])
+                       interface['portName']))
