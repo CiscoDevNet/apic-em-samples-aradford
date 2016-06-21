@@ -14,7 +14,7 @@ git clone https://github.com/CiscoDevNet/uniq.git
 This optional step will create a virtual environment for uniq
 
 ``` bash
-pyvenv env
+virtualenv -p python3 env
 source env/bin/activate
 ```
 
