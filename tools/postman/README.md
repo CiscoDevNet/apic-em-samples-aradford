@@ -7,7 +7,7 @@ You need to import the collection as well as the environment.  You can import th
 You can also download them and import from file/folder.
 
 * https://raw.githubusercontent.com/CiscoDevNet/apic-em-samples-aradford/master/tools/postman/APIC-EM%2520Sandbox.postman_environment
-* https://raw.githubusercontent.com/CiscoDevNet/apic-em-samples-aradford/master/tools/postman/APIC-EM%2520Sandbox.json.postman_collection
+* https://raw.githubusercontent.com/CiscoDevNet/apic-em-samples-aradford/master/tools/postman/APIC-EM%2520Sandbox.postman_collection
 
 ![alt tag](images/importing.png)
 

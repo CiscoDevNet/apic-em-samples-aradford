@@ -21,13 +21,14 @@
 			"order": [
 				"e5915741-8316-6f75-0656-5b9e93a2d4d0",
 				"fb9a7a9d-e2ae-1c7f-36ef-fc8907fa0ee6",
+				"76918d5f-33b2-2ed8-5c29-606fad90f94d",
 				"a1715d43-9134-b600-5bf2-e00e334fe396",
 				"198172a3-8832-4366-db5f-df85e66a28c6",
 				"c4be9f36-6354-d1e5-e9b9-3d3cf81567de",
 				"6a69fd58-0132-cbf2-b481-be1939578bbc"
 			],
 			"owner": 0,
-			"collectionId": "b664f8a5-2713-4092-b57c-f50b7ea7592c"
+			"collectionId": "f2754ae6-5588-050b-4442-61bf4cd97622"
 		},
 		{
 			"id": "6d8c9a68-e6d3-0b24-e0f9-c40e4fe8fba0",
@@ -110,6 +111,7 @@
 	"owner": 0,
 	"remoteLink": "",
 	"public": false,
+	"published": false,
 	"requests": [
 		{
 			"id": "059a5fbd-7140-a44b-7e51-22ee5f167770",
@@ -218,23 +220,21 @@
 		{
 			"id": "198172a3-8832-4366-db5f-df85e66a28c6",
 			"headers": "x-auth-token: {{token}}\n",
-			"url": "https://{{apic}}:{{port}}/api/v1/interface/network-device/{{licenseDeviceId}}",
-			"pathVariables": {},
+			"url": "https://{{apic}}:{{port}}/api/v1/interface/network-device/{{deviceId}}",
 			"preRequestScript": "",
+			"pathVariables": {},
 			"method": "GET",
-			"collectionId": "f2754ae6-5588-050b-4442-61bf4cd97622",
 			"data": [],
 			"dataMode": "params",
-			"name": "https://{{apic}}:{{port}}/api/v1/interface/network-device/{{licenseDeviceId}}",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1465790967983,
 			"version": 2,
-			"responses": [],
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"folder": "6223c900-78ff-eede-78ad-6a0d40c9e98b"
+			"time": 1467913238741,
+			"name": "https://{{apic}}:{{port}}/api/v1/interface/network-device/{{licenseDeviceId}}",
+			"description": "",
+			"collectionId": "f2754ae6-5588-050b-4442-61bf4cd97622",
+			"responses": []
 		},
 		{
 			"id": "1df1f365-3ba2-2e92-ff24-864762b37fdb",
@@ -249,12 +249,11 @@
 			"tests": "var data = JSON.parse(responseBody);\n\nif (data.response.progress) {\n  tests[\"Body has progress\"] = true;\n  postman.setEnvironmentVariable(\"pathId\", data.response.progress);\n}\nelse {\n  tests[\"Body has progress\"] = false;\n}",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1452133143612,
+			"time": 1467017269607,
 			"name": "https://{{apic}}:{{port}}/api/v1/task",
 			"description": "Gets a task status.\nuses environment variable for the taskId\n\nAlso parses the result of the task to find the ID of the path.\n\nThis is stored in the pathId environment variable",
 			"collectionId": "f2754ae6-5588-050b-4442-61bf4cd97622",
-			"responses": [],
-			"folder": "f4bb8f93-267e-25a4-0f0f-9ccd723a1c0f"
+			"responses": []
 		},
 		{
 			"id": "23c0fd00-bfd5-f120-9086-ffea1a4ee7ec",
@@ -325,15 +324,14 @@
 			"data": [],
 			"dataMode": "params",
 			"version": 2,
-			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response);\nif (data.response) {\n  tests[\"Body has response\"] = true;\n  var L = data.response.length;\n    for (var i = 0; i < L; i++) {\n    var obj = data.response[i];\n    if (obj.tag == \"InterestingAP\") {\n           postman.setEnvironmentVariable(\"tagId\", obj.id);\n       } \n}\n  \n}\nelse {\n  tests[\"Body has response\"] = false;\n}\n",
+			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response);\nif (data.response) {\n  tests[\"Body has response\"] = true;\n  var L = data.response.length;\n    for (var i = 0; i < L; i++) {\n    var obj = data.response[i];\n    if (obj.tag == \"InterestingDevice\") {\n           postman.setEnvironmentVariable(\"tagId\", obj.id);\n       } \n}\n  \n}\nelse {\n  tests[\"Body has response\"] = false;\n}\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1452067072353,
+			"time": 1467913522269,
 			"name": "https://{{apic}}:{{port}}/api/v1/tag",
 			"description": "Gets a list of all tags defined on the controller",
 			"collectionId": "f2754ae6-5588-050b-4442-61bf4cd97622",
-			"responses": [],
-			"folder": "6d8c9a68-e6d3-0b24-e0f9-c40e4fe8fba0"
+			"responses": []
 		},
 		{
 			"id": "2d9c6873-5ff6-9c70-f286-049d2c2fd777",
@@ -449,15 +447,14 @@
 			"data": [],
 			"dataMode": "params",
 			"version": 2,
-			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response);\nif (data.response) {\n  tests[\"Body has response\"] = true;\n  var L = data.response.length;\n    for (var i = 0; i < L; i++) {\n    var obj = data.response[i];\n    if (obj.tag == \"InterestingAP\") {\n           postman.setEnvironmentVariable(\"tagId\", obj.id);\n       } \n}\n  \n}\nelse {\n  tests[\"Body has response\"] = false;\n}\n",
+			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response);\nif (data.response) {\n  tests[\"Body has response\"] = true;\n  var L = data.response.length;\n    for (var i = 0; i < L; i++) {\n    var obj = data.response[i];\n    if (obj.tag == \"InterestingDevice\") {\n           postman.setEnvironmentVariable(\"tagId\", obj.id);\n       } \n}\n  \n}\nelse {\n  tests[\"Body has response\"] = false;\n}\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1452067072353,
+			"time": 1467913544761,
 			"name": "https://{{apic}}:{{port}}/api/v1/tag FIND TAG",
 			"description": "Finds the tagId for the tag created earlier\n\nthis is stored in the tagId environment variable.",
 			"collectionId": "f2754ae6-5588-050b-4442-61bf4cd97622",
-			"responses": [],
-			"folder": "6d8c9a68-e6d3-0b24-e0f9-c40e4fe8fba0"
+			"responses": []
 		},
 		{
 			"id": "557e4632-ed01-2fbd-726a-32ae7a3e8895",
@@ -502,7 +499,7 @@
 		{
 			"id": "6a69fd58-0132-cbf2-b481-be1939578bbc",
 			"headers": "x-auth-token: {{token}}\n",
-			"url": "https://{{apic}}:{{port}}/api/v1/license-info/network-device/{{licenseDeviceId}}",
+			"url": "https://{{apic}}:{{port}}/api/v1/license-info/network-device/{{deviceId}}",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
@@ -512,8 +509,27 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1465787375103,
+			"time": 1467913387254,
 			"name": "https://{{apic}}:{{port}}/api/v1/license-info/network-device/{{deviceid}}",
+			"description": "",
+			"collectionId": "f2754ae6-5588-050b-4442-61bf4cd97622",
+			"responses": []
+		},
+		{
+			"id": "76918d5f-33b2-2ed8-5c29-606fad90f94d",
+			"headers": "x-auth-token: {{token}}\n",
+			"url": "https://{{apic}}:{{port}}/api/v1/network-device/ip-address/212.1.10.1",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.id);\nif (data.response.id) {\n  tests[\"Body has id\"] = true;\n  postman.setEnvironmentVariable(\"deviceId\", data.response.id);\n}\nelse {\n  tests[\"Body has id\"] = false;\n}\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1467913357893,
+			"name": "https://{{apic}}:{{port}}/api/v1/network-device/ip-address/212.1.10.1",
 			"description": "",
 			"collectionId": "f2754ae6-5588-050b-4442-61bf4cd97622",
 			"responses": []
@@ -742,13 +758,12 @@
 			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1452064938505,
+			"time": 1467913510902,
 			"name": "https://{{apic}}:{{port}}/api/v1/tag POST",
 			"description": "Creates a new tag on the controller",
 			"collectionId": "f2754ae6-5588-050b-4442-61bf4cd97622",
 			"responses": [],
-			"rawModeData": "{ \"tag\" : \"InterestingAP\" }",
-			"folder": "6d8c9a68-e6d3-0b24-e0f9-c40e4fe8fba0"
+			"rawModeData": "{ \"tag\" : \"InterestingDevice\" }"
 		},
 		{
 			"id": "dc91aaea-a93a-c1f1-6a1c-75639fbbe4a5",
@@ -874,13 +889,12 @@
 			"tests": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1452292890228,
+			"time": 1467913559804,
 			"name": "https://{{apic}}:{{port}}/api/v1/tag/association ",
 			"description": "Associates an existing tag with a network-device.\n\nTag needs to have been created before it can be associated\n\nnetwork-device is the deviceId environment variable, you need to change this",
 			"collectionId": "f2754ae6-5588-050b-4442-61bf4cd97622",
 			"responses": [],
-			"rawModeData": "{\n  \"resourceId\": \"{{deviceId}}\",\n\"resourceType\" : \"network-device\",\n  \"tag\": \"InterestingAP\"\n\n}",
-			"folder": "6d8c9a68-e6d3-0b24-e0f9-c40e4fe8fba0"
+			"rawModeData": "{\n  \"resourceId\": \"{{deviceId}}\",\n\"resourceType\" : \"network-device\",\n  \"tag\": \"InterestingDevice\"\n\n}"
 		},
 		{
 			"id": "e5915741-8316-6f75-0656-5b9e93a2d4d0",
