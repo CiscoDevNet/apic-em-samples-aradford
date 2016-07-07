@@ -2,7 +2,7 @@
 login helper module.
 '''
 import requests.exceptions
-from apic_config import APIC, APIC_USER, APIC_PASS
+from apic_config import APIC, APIC_USER, APIC_PASSWORD
 from uniq.apis.nb.client_manager import NbClientManager
 
 
@@ -17,7 +17,7 @@ def login():
         client = NbClientManager(
                 server=APIC,
                 username=APIC_USER,
-                password=APIC_PASS,
+                password=APIC_PASSWORD,
                 connect=True)
     except requests.exceptions.HTTPError as exc_info:
         if exc_info.response.status_code == 401:

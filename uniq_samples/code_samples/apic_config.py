@@ -1,3 +1,3 @@
 APIC="sandboxapic.cisco.com"
 APIC_USER="devnetuser"
-APIC_PASS="Cisco123!"
+APIC_PASSWORD= "Cisco123!"

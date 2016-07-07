@@ -3,12 +3,14 @@
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from  login import login
+from name_wrapper import name_wrap
 
-name = "adam"
+# create a unique name.  Only required in a lab environment
+siteName = name_wrap("adam")
 apic = login()
 
 # get the project
-pnp_project = apic.pnpproject.getPnpSiteByRange(siteName=name)
+pnp_project = apic.pnpproject.getPnpSiteByRange(siteName=siteName)
 print (apic.serialize(pnp_project))
 
 try:

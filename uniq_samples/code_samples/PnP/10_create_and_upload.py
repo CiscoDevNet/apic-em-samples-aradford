@@ -6,10 +6,10 @@ from login import login
 from name_wrapper import name_wrap
 import jinja2
 import json
+import os.path
 import csv
 
-
-from pnp_config import DEVICES, TEMPLATE
+from pnp_config import DEVICES, TEMPLATE, CONFIGS_DIR
 
 def lookup_and_create(apic, project_name):
     project_name = name_wrap(project_name)
@@ -31,26 +31,24 @@ def lookup_and_create(apic, project_name):
 
 # this is due to lack of parameterized search aPI
 def is_file_present(apic, namespace, filename):
+    filename = filename
     file_list = apic.file.getFilesByNamespace(nameSpace=namespace)
-
-    fileid_list = [file for file in file_list.response if file.name == filename]
-
-    return fileid_list
+    fileid_list = [file.id for file in file_list.response if file.name == filename]
+    return None if fileid_list == [] else fileid_list[0]
 
 # what if file already uploaded?
-def upload_file(apic, filename, filebody):
-    filename = name_wrap(filename)
-    fileUpload = {'fileUpload': (filename, filebody)}
-    tmpfile="work_files/config/2960-client.txt"
+def upload_file(apic, filename):
+    #file_present = apic.file.getFilesByNamespace(nameSpace="config", name=filename)
+    #if file_present.response is not []:
+    #    print ("File %s already uploaded: %s" % ("2960-client.txt", file_present))
+    #    return file_present.response[0].id
 
-    #https://sandboxapic.cisco.com/apic/api/v1/pnp-file/config?name=2960-client.txt
-    file_present = apic.file.getFilesByNamespace(nameSpace="config", name="2960-client.txt")
-    #file_present = is_file_present(apic, "config", "2960-client.txt")
-    if file_present.response is not []:
-        print ("File %s already uploaded: %s" % ("2960-client.txt", file_present))
-        return file_present.response[0].id
+    file_id = is_file_present(apic, "config", os.path.basename(filename))
+    if file_id is not None:
+        print ("File %s already uploaded: %s" %(filename, file_id))
+        return file_id
 
-    file_result = apic.file.uploadFile(nameSpace="config", fileUpload=tmpfile)
+    file_result = apic.file.uploadFile(nameSpace="config", fileUpload=filename)
     file_id = file_result.response.id
     return file_id
 
@@ -80,10 +78,11 @@ def create_and_upload(apic, devices, template_file):
         for dict_row in reader:
             print (dict_row)
             outputText = template.render(dict_row)
-            config_filename = dict_row['hostName'] + '-config'
-
+            config_filename = name_wrap(CONFIGS_DIR + dict_row['hostName'] + '-config')
+            with open(config_filename, 'w') as config_file:
+                config_file.write(outputText)
             project_id = lookup_and_create(apic, dict_row['site'])
-            file_id = upload_file(apic, config_filename, outputText)
+            file_id = upload_file(apic, config_filename)
             create_rule (apic, dict_row, project_id, file_id)
 
             print("created file: %s" % config_filename)
@@ -93,5 +92,4 @@ def create_and_upload(apic, devices, template_file):
 
 if __name__ == "__main__":
     apic = login()
-    print(apic)
     create_and_upload(apic, devices=DEVICES, template_file=TEMPLATE)
