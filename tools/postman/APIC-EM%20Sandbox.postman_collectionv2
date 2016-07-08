@@ -1,0 +1,1467 @@
+{
+	"variables": [],
+	"info": {
+		"name": "APIC-EM Sandbox",
+		"_postman_id": "f2754ae6-5588-050b-4442-61bf4cd97622",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1.Ticket",
+			"description": "Need to start by getting a ticket from the controller.  The environment vaiables {{username}} and {{password}} are used to authenticate",
+			"item": [
+				{
+					"name": "/api/v1/ticket",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"token\", data.response.serviceTicket);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/ticket",
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"username\" : \"{{username}}\",\n\"password\" : \"{{password}}\"\n}\n"
+						},
+						"description": "This request gets an authentication ticket.  This will be used for all subsequent requests.\n\nThe variable name is token.\n\nThe variables {{username}} and {{password}} are set in the environment"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. network-device",
+			"description": "",
+			"item": [
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/network-device/1/10",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/network-device/1/14",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "This request uses the \"token\" variable generated from the POST request to get first 14 network-devices"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/host/?limit=100&offset=1",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/host?limit=100&offset=1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Example of the /host API"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/network-device/ip-address/212.1.10.1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.id);\nif (data.response.id) {\n  tests[\"Body has id\"] = true;\n  postman.setEnvironmentVariable(\"deviceId\", data.response.id);\n}\nelse {\n  tests[\"Body has id\"] = false;\n}\n"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/network-device/ip-address/212.1.10.1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/interface",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/interface",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Example of the /interface API"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/interface/network-device/{{licenseDeviceId}}",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/interface/network-device/{{deviceId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/topology/physical-topology",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/topology/physical-topology ",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Example of topology"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/license-info/network-device/{{deviceid}}",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/license-info/network-device/{{deviceId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3.Tags and Location",
+			"description": "",
+			"item": [
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/tag",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response);\nif (data.response) {\n  tests[\"Body has response\"] = true;\n  var L = data.response.length;\n    for (var i = 0; i < L; i++) {\n    var obj = data.response[i];\n    if (obj.tag == \"InterestingDevice\") {\n           postman.setEnvironmentVariable(\"tagId\", obj.id);\n       } \n}\n  \n}\nelse {\n  tests[\"Body has response\"] = false;\n}\n"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/tag",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a list of all tags defined on the controller"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/tag POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}\n"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/tag",
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"tag\" : \"InterestingDevice\" }"
+						},
+						"description": "Creates a new tag on the controller"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/task - TAG",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a task status.\nuses environment variable for the taskId"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/tag FIND TAG",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response);\nif (data.response) {\n  tests[\"Body has response\"] = true;\n  var L = data.response.length;\n    for (var i = 0; i < L; i++) {\n    var obj = data.response[i];\n    if (obj.tag == \"InterestingDevice\") {\n           postman.setEnvironmentVariable(\"tagId\", obj.id);\n       } \n}\n  \n}\nelse {\n  tests[\"Body has response\"] = false;\n}\n"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/tag",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Finds the tagId for the tag created earlier\n\nthis is stored in the tagId environment variable."
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/tag/association ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/tag/association",
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"resourceId\": \"{{deviceId}}\",\n\"resourceType\" : \"network-device\",\n  \"tag\": \"InterestingDevice\"\n\n}"
+						},
+						"description": "Associates an existing tag with a network-device.\n\nTag needs to have been created before it can be associated\n\nnetwork-device is the deviceId environment variable, you need to change this"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/task",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a task status.\nuses environment variable for the taskId"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/tag/association ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data1 = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data1.response.taskId);\n\npostman.setEnvironmentVariable(\"taskId\", data1.response.taskId);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/tag/association/{{tagId}}?resourceType=network-device&resourceId={{deviceId}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Deletes association between tag and device\n\nyou need to delete the association before you can delete the tag"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/tag",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data1 = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data1.response.taskId);\n\npostman.setEnvironmentVariable(\"taskId\", data1.response.taskId);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/tag/{{tagId}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "delete tag from controller"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\nif (data.response.progress) {\n  tests[\"Body has progress\"] = true;\n  postman.setEnvironmentVariable(\"pathId\", data.response.progress);\n}\nelse {\n  tests[\"Body has progress\"] = false;\n}"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/location",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a list of all locations defined on the controller"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}\n"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/location",
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"locationName\": \"Wollongong\",\n    \"geographicalAddress\" : \"-34.42498399999999/150.89312389999998\"\n}\n"
+						},
+						"description": "creates a new location on the controller"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\nif (data.response.progress) {\n  tests[\"Body has progress\"] = true;\n  postman.setEnvironmentVariable(\"locationId\", data.response.progress);\n}\nelse {\n  tests[\"Body has progress\"] = false;\n}"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a task status.\nuses environment variable for the taskId\n\nLooks for progress field as it contains the ID of the newly created locaiton\nthis is stored in locationId environment variable"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/network-device/location",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/network-device/location",
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\"id\" : \"{{deviceId}}\",\n\"location\" : \"{{locationId}}\"\n}"
+						},
+						"description": "Adds a location to a network-device, with Id of deviceId.\n\nThe deviceId in the environment needs to be changed if not using the sandbox.\n\nLooks for progress field as it contains the ID of the newly created locaiton\nthis is stored in locationId environment variable"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/network-device/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data1 = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data1.response.taskId);\n\npostman.setEnvironmentVariable(\"taskId\", data1.response.taskId);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/network-device/{{deviceId}}/location",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "deletes a location from the network device.\n- deviceId is in the environement and was use to add the location\n- locationId was captured when the location was created"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/location{{locaitonId}}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data1 = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data1.response.taskId);\n\npostman.setEnvironmentVariable(\"taskId\", data1.response.taskId);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/location/{{locationId}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "deletes the location create earlier.\nUses locationId environment varaible"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4.Path Trace",
+			"description": "",
+			"item": [
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/flow-analysis",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}\n"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/flow-analysis",
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"sourceIP\" : \"65.1.1.86\", \"destIP\" : \"212.1.10.20\"}"
+						},
+						"description": "Creates a flow analysis.  sourceIP and destIP are specified.\n\nsrc/dst port can also be provided"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\nif (data.response.progress) {\n  tests[\"Body has progress\"] = true;\n  postman.setEnvironmentVariable(\"pathId\", data.response.progress);\n}\nelse {\n  tests[\"Body has progress\"] = false;\n}"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a task status.\nuses environment variable for the taskId\n\nAlso parses the result of the task to find the ID of the path.\n\nThis is stored in the pathId environment variable"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/flow-analysis/{{pathId}}",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/flow-analysis/{{pathId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a flow-analyis\nuses environment variable for the pathId"
+					},
+					"response": [
+						{
+							"name": "flow",
+							"originalRequest": {
+								"url": "https://sandboxapic.cisco.com:9443/api/v1/flow-analysis/643e858b-0010-4ac8-b3d8-6f29bf2eb095",
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "ST-578-P7dWDPvQNBwwZ09Kkvyh-cas",
+										"name": "x-auth-token",
+										"enabled": true
+									},
+									{
+										"key": "Cache-Control",
+										"name": "Cache-Control",
+										"value": "no-cache"
+									},
+									{
+										"key": "Postman-Token",
+										"name": "Postman-Token",
+										"value": "b9d52458-e0f0-511f-9334-8ea9ab1d9bb5"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": "{\n    \"sourceIP\" : \"65.1.1.83\", \"destIP\" : \"212.1.10.20\"\n}"
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "javascript",
+							"_postman_previewtype": "html",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache, no-store",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "close",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Strict-Transport-Security",
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains",
+									"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+								},
+								{
+									"name": "X-Frame-Options",
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN",
+									"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+								}
+							],
+							"cookie": [],
+							"responseTime": 3414,
+							"body": "{\"response\":{\"request\":{\"sourceIP\":\"65.1.1.83\",\"destIP\":\"212.1.10.20\"},\"lastUpdate\":\"Thu Jan 07 02:16:05 UTC 2016\",\"properties\":[],\"networkElementsInfo\":[{\"id\":\"cf05d21e-29bc-4b9d-8a32-12f7877a8355\",\"type\":\"wireless\",\"ip\":\"65.1.1.83\",\"linkInformationSource\":\"Switched\"},{\"id\":\"0a15fd77-44ba-4858-b3b1-0df37c4328e0\",\"name\":\"AP7081.059f.19ca\",\"type\":\"Unified AP\",\"ip\":\"55.1.1.3\",\"role\":\"ACCESS\",\"linkInformationSource\":\"Switched\",\"tunnels\":[\"CAPWAP Tunnel\"]},{\"id\":\"93a73198-850b-4002-bbf3-a224befae61d\",\"name\":\"CAMPUS-Access1\",\"type\":\"Switches and Hubs\",\"ip\":\"212.1.10.1\",\"ingressInterface\":{\"physicalInterface\":{\"id\":\"101550de-e72c-4071-81f7-3e2f4f3fbf62\",\"name\":\"GigabitEthernet1/0/26\"}},\"egressInterface\":{\"physicalInterface\":{\"id\":\"ea919b9d-cf40-41b9-83bc-42e1ea07806e\",\"name\":\"GigabitEthernet1/0/1\"}},\"role\":\"ACCESS\",\"linkInformationSource\":\"Switched\",\"tunnels\":[\"CAPWAP Tunnel\"]},{\"id\":\"b3aa8311-62f5-44a3-b432-fa857324f447\",\"name\":\"CAMPUS-Dist1\",\"type\":\"Switches and Hubs\",\"ip\":\"55.1.1.100\",\"ingressInterface\":{\"physicalInterface\":{\"id\":\"07132e28-404b-4335-8682-28fd294c06cf\",\"name\":\"GigabitEthernet5/5\"}},\"egressInterface\":{\"physicalInterface\":{\"id\":\"92615402-430b-4ec9-b7b8-4441818fba41\",\"name\":\"GigabitEthernet5/38\"}},\"role\":\"BORDER ROUTER\",\"linkInformationSource\":\"Switched\",\"tunnels\":[\"CAPWAP Tunnel\"]},{\"id\":\"e2c0cc49-f9a5-45b5-8884-825df2b8f40a\",\"name\":\"Campus-WLC-5508\",\"type\":\"Wireless Controller\",\"ip\":\"172.28.97.253\",\"ingressInterface\":{\"physicalInterface\":{\"id\":\"6d10cfb0-7428-452d-b1f6-419fe8532315\",\"name\":\"GigabitEthernet0/0/1\"}},\"egressInterface\":{\"physicalInterface\":{\"id\":\"6d10cfb0-7428-452d-b1f6-419fe8532315\",\"name\":\"GigabitEthernet0/0/1\"}},\"role\":\"CORE\",\"linkInformationSource\":\"Switched\",\"tunnels\":[\"CAPWAP Tunnel\"]},{\"id\":\"b3aa8311-62f5-44a3-b432-fa857324f447\",\"name\":\"CAMPUS-Dist1\",\"type\":\"Switches and Hubs\",\"ip\":\"55.1.1.100\",\"ingressInterface\":{\"physicalInterface\":{\"id\":\"92615402-430b-4ec9-b7b8-4441818fba41\",\"name\":\"GigabitEthernet5/38\"},\"virtualInterface\":[{\"id\":\"dc4b7148-ae44-4213-a074-15765749270c\",\"name\":\"Vlan600\"}]},\"egressInterface\":{\"physicalInterface\":{\"id\":\"07132e28-404b-4335-8682-28fd294c06cf\",\"name\":\"GigabitEthernet5/5\"},\"virtualInterface\":[{\"id\":\"86511766-2235-424c-8254-e41eb5f4304c\",\"name\":\"Vlan200\"}]},\"role\":\"BORDER ROUTER\",\"linkInformationSource\":\"InterVlan Routing\"},{\"id\":\"93a73198-850b-4002-bbf3-a224befae61d\",\"name\":\"CAMPUS-Access1\",\"type\":\"Switches and Hubs\",\"ip\":\"212.1.10.1\",\"ingressInterface\":{\"physicalInterface\":{\"id\":\"ea919b9d-cf40-41b9-83bc-42e1ea07806e\",\"name\":\"GigabitEthernet1/0/1\"}},\"egressInterface\":{\"physicalInterface\":{\"id\":\"2a0d27aa-5139-4512-9559-1b38a51b2204\",\"name\":\"GigabitEthernet1/0/47\"}},\"role\":\"ACCESS\",\"linkInformationSource\":\"Switched\"},{\"id\":\"8c989306-818e-488f-9974-1476be6ca7b5\",\"type\":\"wired\",\"ip\":\"212.1.10.20\"}]},\"version\":\"1.0\"}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "5.network PnP",
+			"description": "",
+			"item": [
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/pnp-project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}\n"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/pnp-project",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a list of all projects defined on the controller"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/pnp-project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}\n"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/pnp-project",
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\"siteName\": \"Sydney\"}]"
+						},
+						"description": "Creates a new project"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\nif (data.response.progress) {\n  tests[\"Body has progress\"] = true;\n  var prog = JSON.parse(data.response.progress)\n  postman.setEnvironmentVariable(\"projectId\", prog.siteId);\n}\nelse {\n  tests[\"Body has progress\"] = false;\n}"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a task status.\nuses environment variable for the taskId\n\nAlso parse the progress field to find the ID of the project that was created\n\nthis is stored in the projectId environment variable."
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/pnp-project/{{projectId}}/device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}\n"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/pnp-project/{{projectId}}/device",
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\n        \"serialNumber\": \"12345678901\",\n        \"platformId\": \"C2960X\",\n        \"hostName\": \"syd-sw1\",\n        \"pkiEnabled\": true\n}]"
+						},
+						"description": "Creates a rule for a device in a project.\n\nuses the projectId from the project we created earlier"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/task",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a task status.\nuses environment variable for the taskId"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/pnp-project/{{projectId}}/device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\nif (data.response) {\n  tests[\"Body has progress\"] = true;\n  postman.setEnvironmentVariable(\"projectDeviceId\", data.response[0].id);\n}\nelse {\n  tests[\"Body has progress\"] = false;\n}"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/pnp-project/{{projectId}}/device",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets all of the devices for a project\nUses the projectId environment variable"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/pnp-project/{{projectId}}/device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}\n"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/pnp-project/{{projectId}}/device",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\n        \"serialNumber\": \"12345678901\",\n        \"platformId\": \"C2960X\",\n        \"hostName\": \"syd-sw2\",\n        \"pkiEnabled\": true,\n        \"id\" : \"projectDeviceId\"\n}]"
+						},
+						"description": "Updates a parameter of the device\nUses the projectNetworkDevice variable from the environment\nAlso needs projectId environment variable"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/pnp-project/{{projectId}}?deleteRule=1&deleteDevice=1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data1 = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data1.response.taskId);\n\npostman.setEnvironmentVariable(\"taskId\", data1.response.taskId);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/pnp-project/{{projectId}}?deleteRule=1&deleteDevice=1",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Delete the project and all rules/devices contained in it"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/task",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a task status.\nuses environment variable for the taskId"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/file/namespace/config",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/file/namespace/config",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Lists all of the config files on the controller.\nYou can all do the same thing for image files"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/file/config",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.id) {\n  tests[\"Body has id\"] = true;\n  postman.setEnvironmentVariable(\"fileId\", data.response.id);\n}\nelse {\n  tests[\"Body has id\"] = false;\n}\n"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/file/config",
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileUpload",
+									"value": "",
+									"type": "file",
+									"enabled": true
+								}
+							]
+						},
+						"description": "This uploads a configuration file to the controller.\n\nNOTE: You need to select a file to be uploaded.  CLick on the \"body\" tab to select a file\n\nNOTENOTE:  This call is synchronous... there is no task"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/file/config/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data1 = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data1.response.taskId);\n\npostman.setEnvironmentVariable(\"taskId\", data1.response.taskId);"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/file/{{fileId}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Deletes a configuration file from the controller.\n\nUses the fileId from the previous POST to delete"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "6.IWAN",
+			"description": "",
+			"item": [
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/policy",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/policy",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a list of all projects defined on the controller"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/category",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/category",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a list of all projects defined on the controller"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}\n"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/policy",
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\r\n    \"policyName\": \"email\",\r\n    \"resource\": {\r\n      \"categories\": [\r\n        {\r\n          \"id\": \"aef9ef9c-f863-4ad9-9a96-bd91c9688949\",\r\n          \"name\": \"email\"\r\n        }\r\n      ]\r\n    },\r\n    \"actions\": [ \"SET_PROPERTY\" ],\r\n    \"policyScope\": \"IWAN\",\r\n    \"actionProperty\": {\r\n      \"relevanceLevel\": \"Default\",\r\n      \"pathControlFlag\": true,\r\n      \"pathPreferenceFlag\": true,\r\n      \"PrimaryPathPref\": [\"interne\"],\r\n      \"SecondaryPathPref\": [ \"mpls\"]\r\n    }\r\n  }]\r\n"
+						},
+						"description": "Gets a list of all projects defined on the controller"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/task",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a task status.\nuses environment variable for the taskId"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "7.EasyQoS",
+			"description": "",
+			"item": [
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/application",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/application",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a list of all applications controller"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/application",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/application",
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\n            \"trafficClass\": \"BULK_DATA\",\n            \"helpString\": \"newApp\",\n            \"name\": \"newApp\",\n            \"appProtocol\": \"tcp\",\n            \"tcpPorts\": \"48766\",\n            \"transportIps\": \"0.0.0.0\",\n            \"pfrThresholdJitter\": 1,\n            \"pfrThresholdLossRate\": 50,\n            \"pfrThresholdOneWayDelay\": 500,\n            \"pfrThresholdJitterPriority\": 1,\n            \"pfrThresholdLossRatePriority\": 2,\n            \"pfrThresholdOneWayDelayPriority\": 3,\n            \"category\": \"other\",\n            \"subCategory\": \"other\",\n            \"categoryId\": \"f1283ed8-14c2-420e-8d3f-8e9a48931a79\",\n            \"engineId\": 6,\n            \"rank\": 1\n}]"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/task",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a task status.\nuses environment variable for the taskId"
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/application",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/application",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\n  \t\"id\": \"{{appId}}\",\n \n      \"category\": \"other\",\n      \"categoryId\": \"f1283ed8-14c2-420e-8d3f-8e9a48931a79\",\n      \n            \"engineId\": \"6\",\n      \"selectorId\": \"20088\",\n      \"popularity\": 10,\n \n \n      \"status\": \"Active\",\n      \"pfrThresholdJitter\": 1,\n      \"pfrThresholdJitterPriority\": 1,\n      \"pfrThresholdLossRate\": 50,\n      \"pfrThresholdLossRatePriority\": 2,\n      \"pfrThresholdOneWayDelay\": 500,\n      \"pfrThresholdOneWayDelayPriority\": 3,\n      \"trafficClass\": \"BULK_DATA\",\n      \"rank\": 1,\n      \"subCategory\": \"other\",\n      \"name\": \"newApp\",\n      \"appProtocol\": \"tcp\",\n      \"tcpPorts\": \"48767\",\n      \"transportIps\": \"0.0.0.0\"\n\n}]"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/application?name=newApp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\n\nif (data.response[0].id) {\n  tests[\"Body has id\"] = true;\n  postman.setEnvironmentVariable(\"appId\", data.response[0].id);\n}\nelse {\n  tests[\"Body has id\"] = false;\n}"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/application?name=newApp",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/application/{{appId}}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": "var data = JSON.parse(responseBody);\nconsole.log(\"here\");\nconsole.log(data.response.taskId);\nif (data.response.taskId) {\n  tests[\"Body has taskid\"] = true;\n  postman.setEnvironmentVariable(\"taskId\", data.response.taskId);\n}\nelse {\n  tests[\"Body has taskId\"] = false;\n}"
+							}
+						}
+					],
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/application/{{appId}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\n  \t\"id\": \"{{appId}}\",\n \"instanceUuid\": \"7cd4a434-89bc-413d-b5a9-900b782da32e\",\n      \"category\": \"other\",\n      \"categoryId\": \"f1283ed8-14c2-420e-8d3f-8e9a48931a79\",\n      \n            \"engineId\": \"6\",\n      \"selectorId\": \"20088\",\n      \"popularity\": 10,\n \n \n      \"status\": \"Active\",\n      \"pfrThresholdJitter\": 1,\n      \"pfrThresholdJitterPriority\": 1,\n      \"pfrThresholdLossRate\": 50,\n      \"pfrThresholdLossRatePriority\": 2,\n      \"pfrThresholdOneWayDelay\": 500,\n      \"pfrThresholdOneWayDelayPriority\": 3,\n      \"trafficClass\": \"BULK_DATA\",\n      \"rank\": 1,\n      \"subCategory\": \"other\",\n      \"name\": \"newApp\",\n      \"appProtocol\": \"tcp\",\n      \"tcpPorts\": \"48767\",\n      \"transportIps\": \"0.0.0.0\"\n\n}]"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "99.Task",
+			"description": "",
+			"item": [
+				{
+					"name": "https://{{apic}}:{{port}}/api/v1/task",
+					"request": {
+						"url": "https://{{apic}}:{{port}}/api/v1/task/{{taskId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-auth-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Gets a task status.\nuses environment variable for the taskId"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
