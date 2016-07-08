@@ -28,7 +28,7 @@ You can also check on the UI for the controller to see the effect of the request
 Most of the calls on the controller are asynchronous (PUT/POST/DELETE).  When you execute these calls, they will always
 succeed and return a taskId.  Take a look at 3.Tags and Locations.  Select and run the second request which is a POST, 
 to create a new Tag called "InterestingDevice".  
-![alt tag](images/task-POST.png)
+![alt tag](images/tag-POST.png)
 
 The response from the previous request is a task.  This is an asynchronous request.  You need to poll the task status
 to find out if the creation was really successful.
