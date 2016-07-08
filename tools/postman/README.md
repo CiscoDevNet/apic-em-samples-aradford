@@ -24,7 +24,9 @@ Inside each folder, the requests are sequential.  GET/POST/DELETE etc.  So you c
 You can also check on the UI for the controller to see the effect of the requests.
 ![alt tag](images/network-device-get.png)
 
-#More Advanced Calls
+
+#More Advanced API Calls
+
 Most of the calls on the controller are asynchronous (PUT/POST/DELETE).  When you execute these calls, they will always
 succeed and return a taskId.  Take a look at 3.Tags and Locations.  Select and run the second request which is a POST, 
 to create a new Tag called "InterestingDevice".  
