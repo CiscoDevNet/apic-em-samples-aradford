@@ -35,7 +35,9 @@ to create a new Tag called "InterestingDevice".
 The response from the previous request is a task.  This is an asynchronous request.  You need to poll the task status
 to find out if the creation was really successful.
 
-The next request in the list shows how to do this.  Notice there is a {{taskId}} in the URL being called.  Anything inside the {{}}
+The next request in the list shows how to do this.  
+
+Notice there is a {{taskId}} in the URL being called.  Anything inside the {{}}
 is a variable.  In this case taskId.  This was set behind the scenes in the previous API call.  
 
 ![alt tag](images/task-response.png)
@@ -43,6 +45,7 @@ is a variable.  In this case taskId.  This was set behind the scenes in the prev
 The body of the response contains a "progress" key.  This indicates the Universally Unique ID (UUID) of the new Tag.  
 This UUID can be used to lookup the tag directly, assign the tag to a network device (the next API call) or delete the
 tag. 
+
 "iserror" being false means the task was successful. The presence of "endTime" means the task has finished.
 ```
 {
@@ -61,7 +64,11 @@ tag.
 ```
 
 Lets take a look what happens if you try to create another tag with the same name.
+
+
 Go back to the "https://{{apic}}:{{port}}/api/v1/tag POST"  request and Send.  
+
+
 Then take a look at the task status "https://{{apic}}:{{port}}/api/v1/task - TAG"
 ![alt tag](images/task-fail.png)
 

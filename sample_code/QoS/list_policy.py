@@ -6,6 +6,7 @@ import os.path, sys
 #change path to allow import from parent directory
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 from apic import get_auth_token, create_url
+from apic_config import APIC, APIC_USER, APIC_PASSWORD
 
 # get the policy by name
 # move all applications to default relevance
@@ -13,7 +14,7 @@ from apic import get_auth_token, create_url
 
 
 def main(apic, user, password):
-    token = get_auth_token(controller_ip=apic, username=user, password=password)
+    token = get_auth_token()
 
     url = create_url(path="policy", controller_ip=apic)
 
@@ -38,11 +39,11 @@ def main(apic, user, password):
 if __name__ == "__main__":
     parser = ArgumentParser(description='Select options.')
     # Input parameters
-    parser.add_argument('--apic', type=str, required=True,
+    parser.add_argument('--apic', type=str, default=APIC,
                         help="The APIC IP or DN")
-    parser.add_argument('-u', '--user', type=str, default='admin',
+    parser.add_argument('-u', '--user', type=str, default=APIC_USER,
                         help="Go on, guess!")
-    parser.add_argument('-p', '--password', type=str, default='cisco',
+    parser.add_argument('-p', '--password', type=str,default=APIC_PASSWORD,
                         help="Yep, this one too! ;-)")
 
 

@@ -45,5 +45,5 @@ if __name__ == "__main__":
             response = delete_project(name_wrap(project))
             print(json.dumps(response, indent=2))
     else:
-        response = delete_project(name_wrap("Sydney"))
+        response = delete_project(name_wrap("Canberra"))
         print(json.dumps(response, indent=2))

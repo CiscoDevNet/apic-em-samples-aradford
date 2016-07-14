@@ -26,6 +26,8 @@ def print_info(interfaces,hosts):
     # this is a hash of the interface_id and hosts that are connected, so can do a lookup
     id_to_host = {host['connectedInterfaceId'] : (host['hostIp'], host['hostMac']) for host in hosts['response']}
 
+    total_up = 0
+    total_ports = 0
     print("{0:25}:{1:9} {2:7}{3:10}{4:6} {5}".format("Interface Name","Speed","Status","Type","Vlan","Other"))
     for interface in natural_sort(interfaces['response']):
         if interface['id'] in id_to_host:
@@ -38,13 +40,23 @@ def print_info(interfaces,hosts):
             extra = "{trunk}{description}".format(trunk=interface['portMode'],description=interface['description'])
         else:
             extra = ""
+
+        if interface['interfaceType'] == "Physical":
+            total_ports +=1
+            if interface['status'] == "up":
+                total_up+=1
         print("{portName:25}:{speed:9} {status:7}{interfaceType:10}{vlanId:6} {extra}".format(portName=interface['portName'],
                                                            speed=interface['speed'],
                                                            status=interface['status'],
                                                             interfaceType=interface['interfaceType'],
                                                             vlanId=interface['vlanId'],
                                                             extra=extra))
-
+        utilization = (total_up * 100) / total_ports
+    # now the utilization summary
+    print("Utilization:{utilization}%, Total ports:{total_ports}, Total up:{total_up}".
+              format(total_ports=total_ports,
+                     total_up=total_up,
+                     utilization=utilization ))
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         dev_id = ip_to_id(sys.argv[1])
