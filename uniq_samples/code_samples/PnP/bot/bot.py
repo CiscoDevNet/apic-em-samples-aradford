@@ -11,43 +11,33 @@ requests.packages.urllib3.disable_warnings()
 
 url = "https://api.ciscospark.com/v1/messages"
 
-SEEN={}
-def parse_and_respond(apic,argv):
+# if this is true, will not actually call the spark API
+#NO_SPARK_API = True
+NO_SPARK_API = False
 
-    if len(argv) != 2:
-        print("Fail")
-        return
-    if  argv[0] == "show":
-        if argv[1] == "pnp-project":
-            projects = list_all_projects(apic)
-            post_to_spark(projects)
-        else:
-            post_to_spark("What did you want me to show?")
-    else:
-        post_to_spark("What did you want me to do?")
+SEEN_CHAT={}
+SEEN_PROJECT={}
 
+def check_for_new_project(apic):
+    currenttime = time.time()
+    projects = apic.pnpproject.getPnpSiteByRange()
+    for project in projects.response:
+        if project.siteName not in SEEN_PROJECT:
+            post_to_spark("APIC>New project created: %s" % project.siteName)
+        # update timestamp
+        SEEN_PROJECT[project.siteName] = currenttime
 
-def get_spark_command_monitor(apic):
+    for projectname in list(SEEN_PROJECT):
+        if SEEN_PROJECT[projectname] != currenttime:
+            print(SEEN_PROJECT[projectname], currenttime, projectname)
+            post_to_spark("APIC>Deleted Project: %s" % projectname)
+            del SEEN_PROJECT[projectname]
 
-    querystring = {"roomId": ROOM, max : "1"}
-
-    headers = {
-    'authorization': auth,
-    'content-type': "application/json"
-    }
-
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    for item in response.json()['items']:
-        if item['id'] not in SEEN:
-            SEEN[item['id']] = "Y"
-            words = item['text'].split()
-            print("GOT:", words[0])
-            if words[0] == "APIC":
-                parse_and_respond(apic, words[1:])
 
 def post_to_spark(message):
     print(message)
-    return
+    if NO_SPARK_API:
+        return
     payload = {"roomId" : ROOM,"text" : message}
     headers = {
     'authorization': auth,
@@ -60,7 +50,7 @@ def post_to_spark(message):
 def main():
     apic = login()
     while True:
-        get_spark_command_monitor(apic)
+        check_for_new_project(apic)
         time.sleep(3)
 
 if __name__ == "__main__":
