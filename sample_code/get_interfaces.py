@@ -7,13 +7,13 @@ from apic import get_auth_token, create_url
 
 def main():
     url = create_url(path="interface")
-    print url
+    print (url)
     token = get_auth_token()
     headers = {'X-auth-token' : token['token']}
     try:
         response = requests.get(url, headers=headers, verify=False)
     except requests.exceptions.RequestException as cerror:
-        print "Error processing request", cerror
+        print ("Error processing request", cerror)
         sys.exit(1)
 
     return response.json()

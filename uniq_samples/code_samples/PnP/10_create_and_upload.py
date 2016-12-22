@@ -36,13 +36,8 @@ def is_file_present(apic, namespace, filename):
     fileid_list = [file.id for file in file_list.response if file.name == filename]
     return None if fileid_list == [] else fileid_list[0]
 
-# what if file already uploaded?
-def upload_file(apic, filename):
-    #file_present = apic.file.getFilesByNamespace(nameSpace="config", name=filename)
-    #if file_present.response is not []:
-    #    print ("File %s already uploaded: %s" % ("2960-client.txt", file_present))
-    #    return file_present.response[0].id
 
+def upload_file(apic, filename):
     file_id = is_file_present(apic, "config", os.path.basename(filename))
     if file_id is not None:
         print ("File %s already uploaded: %s" %(filename, file_id))
@@ -81,11 +76,13 @@ def create_and_upload(apic, devices, template_file):
             config_filename = name_wrap(CONFIGS_DIR + dict_row['hostName'] + '-config')
             with open(config_filename, 'w') as config_file:
                 config_file.write(outputText)
+            print("created file: %s" % config_filename)
             project_id = lookup_and_create(apic, dict_row['site'])
             file_id = upload_file(apic, config_filename)
+
             create_rule (apic, dict_row, project_id, file_id)
 
-            print("created file: %s" % config_filename)
+
 
     finally:
         f.close()

@@ -3,6 +3,7 @@ from __future__ import print_function
 import sys
 from util import get_url
 import re
+import json
 
 # helper for natural sort
 def atoi(text):
@@ -24,7 +25,8 @@ def get_hosts(ip):
 
 def print_info(interfaces,hosts):
     # this is a hash of the interface_id and hosts that are connected, so can do a lookup
-    id_to_host = {host['connectedInterfaceId'] : (host['hostIp'], host['hostMac']) for host in hosts['response']}
+    id_to_host = {host['connectedInterfaceId'] : (host['hostIp'], host['hostMac'])
+                    for host in hosts['response'] if host['hostType'] != "wireless"}
 
     total_up = 0
     total_ports = 0
@@ -62,6 +64,7 @@ if __name__ == "__main__":
         dev_id = ip_to_id(sys.argv[1])
         interfaces = get_interfaces(dev_id)
         hosts = get_hosts(sys.argv[1])
+
         print_info(interfaces, hosts)
     else:
         print("Usage: %s device_ip" % sys.argv[0])
