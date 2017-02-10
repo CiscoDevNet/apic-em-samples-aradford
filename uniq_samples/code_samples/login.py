@@ -19,17 +19,15 @@ def login():
                 username=APIC_USER,
                 password=APIC_PASSWORD,
                 connect=True)
+        return client
     except requests.exceptions.HTTPError as exc_info:
         if exc_info.response.status_code == 401:
             print('Authentication Failed. Please provide valid username/password.')
-
         else:
-            print('HTTP Status Code {code_samples}. Reason: {reason}'.format(
+            print('HTTP Status Code {code}. Reason: {reason}'.format(
                     code=exc_info.response.status_code,
                     reason=exc_info.response.reason))
         exit(1)
     except requests.exceptions.ConnectionError:
-        print('Connection aborted. Please check if the host {} is available.'.format(host))
+        print('Connection aborted. Please check if the host {host} is available.'.format(host=APIC))
         exit(1)
-
-    return client
