@@ -20,7 +20,7 @@ def create_path_trace(args):
 
     if args.stats:
         data["inclusions"]  = ["INTERFACE-STATS","DEVICE-STATS"]
-    print(data)
+    print(json.dumps(data))
     result = post_and_wait("flow-analysis", data)
     return result['progress']
 
@@ -28,7 +28,10 @@ def display_path(pathid):
     path_data = get_url("flow-analysis/%s" % pathid)['response']
     print(json.dumps(path_data,indent=2))
     for network_element in path_data['networkElementsInfo']:
-        element_type = network_element['type']
+        element_type = None
+        if 'type' in network_element:
+            element_type = network_element['type']
+
         if element_type == "wired" or element_type == "wireless":
             print("{ip}:{element_type}".format(ip=network_element["ip"],element_type=element_type))
         else:
