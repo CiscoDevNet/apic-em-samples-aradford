@@ -1,15 +1,15 @@
 
-python 01_network_device.py
-python 01_network_device.py 10.1.12.1
+./01_network_device.py
+./01_network_device.py 10.1.12.1
 
-python 02_interface_device.py 10.1.12.1
+./02_interface_device.py 10.1.12.1
 
-python 03_device_license.py 10.2.2.1
-python 03_device_license.py 10.1.12.1
+./03_device_license.py 10.2.2.1
+./03_device_license.py 10.1.12.1
 
-python 04_find_host.py --ip 10.2.1.22
-python 04_find_host.py --mac 00:24:d7:43:59:d8
-python 04_find_host.py --ip 10.1.15.117
+./04_find_host.py --ip 10.2.1.22
+./04_find_host.py --mac 00:24:d7:43:59:d8
+./04_find_host.py --ip 10.1.15.117
 
-python 05_path_trace.py --srcip 10.1.15.117 --dstip 10.2.1.22
+./05_path_trace.py --srcip 10.1.15.117 --dstip 10.2.1.22
 
