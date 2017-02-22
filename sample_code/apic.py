@@ -49,7 +49,7 @@ def get_auth_token(controller_ip=APIC, username=APIC_USER, password=APIC_PASSWOR
         "token": token
     }
 
-def wait_on_task(task_id, token, timeout=(3*RETRY_INTERVAL), retry_interval=RETRY_INTERVAL):
+def wait_on_task(task_id, token, timeout=(5*RETRY_INTERVAL), retry_interval=RETRY_INTERVAL):
     """ Waits for the specified task to complete
     """
 
