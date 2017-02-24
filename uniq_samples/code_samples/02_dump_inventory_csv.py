@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
 import requests.exceptions
-from apic_config import APIC, APIC_USER, APIC_PASSWORD
-from uniq.apis.nb.client_manager import NbClientManager
 
+from uniq.apis.nb.client_manager import NbClientManager
+APIC="sandboxapic.cisco.com"
+APIC_USER='devnetuser'
+APIC_PASSWORD='Cisco123!'
 
 def login():
     """ Login to APIC-EM northbound APIs in shell.
