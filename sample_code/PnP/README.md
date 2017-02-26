@@ -50,7 +50,7 @@ username cisco password 0 cisco123
 no aaa new-model
 
 int vlan 1
-ip address {{ipAddress}}
+ip address {{ipAddress}} 255.255.255.0
 
 !
 end
