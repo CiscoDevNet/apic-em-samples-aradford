@@ -1,7 +1,8 @@
 This directory contains utilities for using the "CommandRunner"
 API on APIC-EM.
 
-It requires python3 for the uniq library.  It also requires version 1.4 of APIC-EM
+It requires python3 for the uniq library.  It also requires version 1.4 of APIC-EM.
+If you have downloaded an earlier version of uniq you will need to upgrade it.
 
 I also recommend using virtualenv.  Use the following commands as examples
 
