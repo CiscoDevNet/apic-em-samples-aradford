@@ -1,10 +1,11 @@
-APIC-EM Sample Scripts
-======================
+# APIC-EM Sample Scripts
 
-This directory contains some sample python scripts for APIC-EM.  
+This directory contains some sample Python scripts for APIC-EM.
 
-These examples are python2.
+These examples are Python 2.
 
-May need to change user/password in ```apic_config.py```.  You can also change controllers here too and point to your own controller.
+You may need to change the `APIC_USER` AND `APIC_PASSWORD` variables in the
+[apic_config.py](/apic_config.py) file.  You can also change controllers here
+too and point to the URL of your own APIC-EM controller.
 
 The directory PnP contains some examples specifically for Network Plug and Play (PnP)
