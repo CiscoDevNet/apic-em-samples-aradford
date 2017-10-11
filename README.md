@@ -32,4 +32,5 @@ library.  They expose the REST API structure and are a good tool for learning ab
 
 There are examples for Plug-and-Play (PNP), inventory and EasyQoS (EQ).
 
+Also the Top5 blog series scripts
 More to come...

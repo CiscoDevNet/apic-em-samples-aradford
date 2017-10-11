@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}
+<title> APIC-EM Device List </title>
+
+{% endblock %}
+
+{% block body %}
+<h1>APIC-EM Device List</h1>
+<hr>
+<table class="table table-condensed table-striped table-hover table-bordered">
+
+    <thead>
+    <tr>
+        <td class="col-sm-2"> Device </td>
+        <td class="col-sm-1">Serial Number</td>
+        <td class="col-sm-2">Model</td>
+        <td class="col-sm-1">Version</td>
+        <td class="col-sm-2">Active License</td>
+        <td class="col-sm-1">upTime</td>
+        <td class="col-sm-1">bootDateTime</td>
+        <td class="col-sm-1">reachabilityStatus</td>
+    </tr>
+    </thead>
+      <tbody>
+        {% for device in device_data %}
+        <tr>
+            <td>
+                {% if device.family == "Unified AP" %}
+                {{ device.hostname }}
+                {% else %}
+                <a href="{{ url_for('device_detail', device_id=device.id, family=device.family,
+                    hostname=device.hostname, device_ip=device.managementIpAddress) }}"> {{ device.hostname }} </a>
+                {% endif %}
+            </td>
+            <td>{{ device.serialNumber}}</td>
+            <td>{{ device.platformId}}</td>
+            <td>{{ device.softwareVersion}}</td>
+            <td> {% for license in device.license_list %} {{license.name}} | {% endfor %}</td>
+            <td>{{ device.upTime }}</td>
+            <td>{{ device.bootDateTime }}</td>
+            <td>{{ device.reachabilityStatus }}</td>
+        </tr>
+
+    {% endfor %}
+         <tr>
+
+
+      </tbody>
+       </table>
+       <hr>
+
+   </div>
+{% endblock %}

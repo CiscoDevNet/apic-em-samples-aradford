@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block body %}
+
+
+   <div class="well">
+    <h1> Port details for {{ device_ip }} </h1>
+
+       <table class="table table-condensed table-striped table-hover table-bordered">
+
+    <thead>
+    <tr>
+    <td class="col-sm-2"> Name </td>
+        <td class="col-sm-1">Speed</td>
+        <td class="col-sm-1">Vlan</td>
+        <td class="col-sm-1">IP address</td>
+        <td class="col-sm-1">Status</td>
+        <td class="col-sm-1">Mode</td>
+        <td class="col-sm-3">Hosts</td>
+           </tr>
+
+    </thead>
+      <tbody>
+        {% for port in ports %}
+        {% if port.status|string() == "up"|string() %}
+        <tr class="success">
+        {% else %}
+        <tr class="warning">
+        {% endif %}
+            <td>{{ port.portName }}</td>
+            <td>{{ port.speed }}</td>
+            <td>{{port.vlanId}}</td>
+            <td>{{port.ipv4Address}}</td>
+            <td>{{ port.status }}</td>
+            <td>{{ port.portMode }}</td>
+            <td>{% for host in hosts[port.id] %}
+                {{ host }}
+                {% endfor %}
+            </td>
+
+        </tr>
+
+    {% endfor %}
+      </tbody>
+       </table>
+   </div>
+
+{% endblock %}
